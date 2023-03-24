@@ -6,6 +6,7 @@ function Card( { movie }) {
     <StyledWrapper>
         <h1>{movie.Title}</h1>
         <p>{movie.Year}</p>
+        <p>IMDb Rating {movie.imdbRating}</p>
         <img src={movie.Poster} alt={movie.Title} />
     </StyledWrapper>
   )
