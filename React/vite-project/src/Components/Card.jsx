@@ -9,7 +9,7 @@ function Card({ movie }) {
           <StyledWrapper>
             <h1>{movie.Title}</h1>
             <p>{movie.Year}</p>
-            <p>{movie.imdbRating}</p>
+            <p>IMBd rating: {movie.imdbRating}</p>
             <StyledImg src={movie.Poster} alt={movie.Title} />
           </StyledWrapper>
         ) : (
