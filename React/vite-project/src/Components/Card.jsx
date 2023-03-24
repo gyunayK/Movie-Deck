@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledWrapper } from './Style/Card.styled'
+import { StyledWrapper, StyledImg } from './Style/Card.styled'
 
 function Card( { movie }) {
   return (
@@ -7,7 +7,8 @@ function Card( { movie }) {
         <h1>{movie.Title}</h1>
         <p>{movie.Year}</p>
         <p>IMDb Rating {movie.imdbRating}</p>
-        <img src={movie.Poster} alt={movie.Title} />
+        <StyledImg src={movie.Poster} alt={movie.Title} />
+        
     </StyledWrapper>
   )
 }
