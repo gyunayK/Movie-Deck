@@ -26,13 +26,9 @@ export const StyledInput = styled.input`
   color: #000;
 `;
 
-
 export const StyledLabel = styled.label`
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
 `;
-
-
-
