@@ -1,16 +1,23 @@
-import React from 'react'
-import { StyledWrapper, StyledImg } from './Style/Card.styled'
+import React from "react";
+import { StyledWrapper, StyledImg } from "./Style/Card.styled";
 
-function Card( { movie }) {
+function Card({ movie }) {
   return (
-    <StyledWrapper>
-        <h1>{movie.Title}</h1>
-        <p>{movie.Year}</p>
-        <p>IMDb Rating {movie.imdbRating}</p>
-        <StyledImg src={movie.Poster} alt={movie.Title} />
-        
-    </StyledWrapper>
-  )
+    <>
+      {
+        (movie.Title = movie.Title ? (
+          <StyledWrapper>
+            <h1>{movie.Title}</h1>
+            <p>{movie.Year}</p>
+            <p>{movie.imdbRating}</p>
+            <StyledImg src={movie.Poster} alt={movie.Title} />
+          </StyledWrapper>
+        ) : (
+          ""
+        ))
+      }
+    </>
+  );
 }
 
-export default Card
+export default Card;
