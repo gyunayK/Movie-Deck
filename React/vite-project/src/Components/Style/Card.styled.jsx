@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const BaseDuration = "500ms";
+
 export const Figure = styled.figure`
   position: relative;
   display: flex;
@@ -25,6 +26,7 @@ export const Figure = styled.figure`
 
     img {
       transform: scale(1.25);
+      
     }
 
     figcaption {
@@ -51,7 +53,9 @@ export const Figure = styled.figure`
 
   img {
     height: 100%;
+    width: 100%;
     transition: 0.25s;
+
   }
 
   figcaption {
@@ -77,4 +81,12 @@ export const Figure = styled.figure`
       line-height: 1.75;
     }
   }
+`;
+
+export const Notfound = styled.h1`
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  margin-top: 2rem;
+  margin: 0 auto;
 `;

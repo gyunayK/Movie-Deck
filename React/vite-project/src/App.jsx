@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import Card from "./Components/Card";
 import Search from "./Components/Search";
-
-//import './App.css'
+ //import "./App.css";
 
 function App() {
   const [movie, setMovie] = useState([]);
   const [search, setSearch] = useState("");
+  const [showSecond, setShowSecond] = useState(false);
 
   const apikey = import.meta.env.VITE_MOVIE_API_KEY;
   const url = `https://www.omdbapi.com/?t=${search}&plot=full&apikey=${apikey}`;
@@ -22,9 +22,9 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Search setSearch={setSearch} />
-      <Card movie={movie} />
+    <div className={`App ${showSecond ? "show-second" : ""}`}>
+      <Search setSearch={setSearch} className="first"/>
+      {search ? <Card movie={movie} className="second"/> : ""}
     </div>
   );
 }

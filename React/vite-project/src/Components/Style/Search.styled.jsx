@@ -16,6 +16,7 @@ export const StyledForm = styled.form`
   height: 35vh;
 `;
 
+
 export const StyledInput = styled.input`
   width: 50%;
   padding: 0.5rem;
@@ -32,3 +33,4 @@ export const StyledLabel = styled.label`
   color: #fff;
   margin-bottom: 1rem;
 `;
+

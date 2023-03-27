@@ -1,7 +1,29 @@
 .App {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "first second";
   grid-gap: 10px;
   padding: 10px;
   align-items: center;
+  grid-auto-flow: dense;
+}
+
+.first {
+  grid-area: first;
+  transition: transform 0.3s ease-out;
+  
+}
+
+.second {
+  grid-area: second;
+  opacity: 1;
+  transition: opacity 0.7s ease-out;
+}
+
+.show-second .first {
+  transform: translateX(-100%);
+}
+
+.show-second .second {
+  opacity: 1;
 }

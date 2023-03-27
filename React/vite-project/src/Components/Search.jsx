@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./Style/try.css";
+import "./Style/Btn.css";
 
 import { StyledForm, StyledInput, StyledLabel } from "./Style/Search.styled";
 
@@ -18,7 +18,7 @@ function Search({ setSearch }) {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit} >
         <StyledLabel htmlFor="search">Search for a movie</StyledLabel>
         <StyledInput
           type="text"

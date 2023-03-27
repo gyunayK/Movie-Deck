@@ -7,11 +7,13 @@
   color: rgba(255, 255, 255, 0.87);
   background: rgb(63, 214, 251);
   background: linear-gradient(
-    90deg,
+    180deg,
     rgba(63, 214, 251, 1) 0%,
-    rgba(122, 54, 219, 1) 48%,
-    rgba(96, 83, 188, 1) 92%
+    rgba(117, 97, 233, 1) 26%,
+    rgba(183, 83, 188, 1) 92%
   );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
