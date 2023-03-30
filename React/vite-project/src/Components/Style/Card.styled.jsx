@@ -16,6 +16,14 @@ export const Figure = styled.figure`
   overflow: hidden;
   margin: 0 auto;
 
+  .beforeLoad{
+    height: 100%;
+    width: 100%;
+    transition: 0.25s;
+    background-size: contain;
+  }
+
+
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
@@ -28,6 +36,7 @@ export const Figure = styled.figure`
       transform: scale(1.25);
       
     }
+  
 
     figcaption {
       bottom: 0;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./Components/Card";
 import Search from "./Components/Search";
- //import "./App.css";
+//import "./App.css";
 
 function App() {
   const [movie, setMovie] = useState([]);
@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div className={`App ${showSecond ? "show-second" : ""}`}>
-      <Search setSearch={setSearch} className="first"/>
-      {search ? <Card movie={movie} className="second"/> : ""}
+      <Search setSearch={setSearch} className="first" />
+      {search ? <Card movie={movie} className="second" /> : ""}
     </div>
   );
 }

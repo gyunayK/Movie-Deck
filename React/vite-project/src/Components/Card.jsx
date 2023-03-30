@@ -4,42 +4,33 @@ import defaultImage from "../assets/IMG/No_IMG.png";
 import loadingImage from "../assets/IMG/second.gif";
 
 function Card({ movie }) {
-  const [loading, setLoading] = useState(true);
+  const [showLoad, setShowLoad] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-
-    const handleImageLoad = () => {
-      setLoading(false);
-    };
-
-    const imgEl = new Image();
-    imgEl.addEventListener("load", handleImageLoad);
-    imgEl.addEventListener("error", handleImageLoad);
-    imgEl.src = movie.Poster;
-
-    return () => {
-      imgEl.removeEventListener("load", handleImageLoad);
-      imgEl.removeEventListener("error", handleImageLoad);
-    };
+    setTimeout(() => {
+      setShowLoad(true);
+    }, 1000);
   }, [movie]);
 
   const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
 
   return (
     <>
-      {loading ? (
-        <img src={loadingImage} alt="loading animation" />
-      ) : movie && movie.Title ? (
-        <Figure >
+      {!showLoad ? (
+        <Figure>
           <h1>{movie.Title}</h1>
-          <img
-            className="cardL"
-            src={posterSrc}
-            alt={movie.Title}
-            onLoad={() => setLoading(false)}
-            onError={() => setLoading(false)}
-          />
+          <img src={loadingImage} alt="loading animation"  className="beforeLoad"/>
+          <figcaption>
+            <h3>Info</h3>
+            <p>Year: {movie.Year}</p>
+            <p>IMBd rating: {movie.imdbRating}</p>
+            <p>Genre: {movie.Genre}</p>
+          </figcaption>
+        </Figure>
+      ) : movie && movie.Title ? (
+        <Figure>
+          <h1>{movie.Title}</h1>
+          <img className="cardL" src={posterSrc} alt={movie.Title}/>
           <figcaption>
             <h3>Info</h3>
             <p>Year: {movie.Year}</p>
