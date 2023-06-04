@@ -4,25 +4,13 @@ import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
 
 function Card({ movie }) {
-  const [showLoad, setShowLoad] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowLoad(true);
-    }, 1000);
-  }, [movie]);
-
   const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
 
   return (
     <>
-      {!showLoad ? (
+      {movie.length === 0 ? (
         <Figure>
-          <img
-            src={loadingImage}
-            alt="loading animation"
-            id="beforeLoad"
-          />
+          <img src={loadingImage} alt="loading animation" id="beforeLoad" />
         </Figure>
       ) : movie && movie.Title ? (
         <Figure>

@@ -1,6 +1,4 @@
-require('dotenv').config();
 const axios = require('axios');
-
 
 exports.getMovieByName = async (req, res) => {
     const name = req.params.name;

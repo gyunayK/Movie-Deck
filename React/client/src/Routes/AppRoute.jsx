@@ -17,12 +17,14 @@ function App() {
   const url = `http://localhost:${port}/movie/search/${search}`;
 
   const fetchData = async () => {
+    setMovie([]);
     const response = await fetch(url);
     const data = await response.json();
     setMovie(data);
   };
 
   useEffect(() => {
+    
     fetchData();
   }, [search]);
 
@@ -36,15 +38,13 @@ function App() {
             element={
               <>
                 <Search setSearch={setSearch} className="first" />
-                {search && <Card movie={movie} className="second" /> }
-                
+                {search && <Card movie={movie} className="second" />}
               </>
             }
           />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-
         </Routes>
       </div>
     </BrowserRouter>
