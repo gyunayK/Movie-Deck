@@ -11,11 +11,10 @@ import About from "../Components/About/About";
 
 function App() {
   const [movie, setMovie] = useState([]);
-  const [search, setSearch] = useState("Iron Man 3");
-  const [showSecond, setShowSecond] = useState(false);
+  const [search, setSearch] = useState("");
 
-  const apikey = import.meta.env.VITE_MOVIE_API_KEY;
-  const url = `https://www.omdbapi.com/?t=${search}&plot=full&apikey=${apikey}`;
+  const port = import.meta.env.VITE_PORT;
+  const url = `http://localhost:${port}/movie/search/${search}`;
 
   const fetchData = async () => {
     const response = await fetch(url);
@@ -29,7 +28,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className={`App ${showSecond ? "show-second" : ""}`}>
+      <div>
         <Header />
         <Routes>
           <Route
@@ -37,7 +36,8 @@ function App() {
             element={
               <>
                 <Search setSearch={setSearch} className="first" />
-                <Card movie={movie} className="second" />
+                {search && <Card movie={movie} className="second" /> }
+                
               </>
             }
           />
