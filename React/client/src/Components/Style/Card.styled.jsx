@@ -16,11 +16,13 @@ export const Figure = styled.figure`
   overflow: hidden;
   margin: 0 auto;
 
-  .beforeLoad{
+  #beforeLoad{
     height: 100%;
     width: 100%;
     transition: 0.25s;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
 
