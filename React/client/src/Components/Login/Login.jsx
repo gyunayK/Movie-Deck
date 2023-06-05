@@ -44,7 +44,7 @@ export default function SignIn() {
       localStorage.setItem("user", data.user);
       localStorage.setItem("userName", data.firstName);
       console.log(data);
-      // window.location.href = "/";
+       window.location.href = "/";
     } else {
       toast.error("Invalid credentials");
     }

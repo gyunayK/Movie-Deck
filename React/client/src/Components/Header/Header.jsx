@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,9 +9,22 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const checkIfLoggedIn = () => {
+      const storedUserName = localStorage.getItem("userName");
+      if (storedUserName) {
+        setUserName(storedUserName);
+        toast.success(`Welcome back ${storedUserName}!`);
+      }
+    };
+    checkIfLoggedIn();
+  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,6 +32,29 @@ export default function Header() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogout = async () => {
+    const port = import.meta.env.VITE_PORT;
+    const url = `http://localhost:${port}/user/logout`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      // check if HTTP response status code is not successful
+      const data = await response.json(); // parse the response to JSON
+      toast.error(data.message);
+      return;
+    }
+
+    toast.success("Logged out successfully");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("user");
+    setUserName("");
   };
 
   return (
@@ -43,6 +78,16 @@ export default function Header() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
+            {userName.length > 0 && (
+              <>
+                <MenuItem onClick={handleClose} component={Link} to="/">
+                  Signed in as: {userName}
+                </MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/favorites">
+                  View Favorites List
+                </MenuItem>
+              </>
+            )}
             <MenuItem onClick={handleClose} component={Link} to="/">
               Search For a Movie
             </MenuItem>
@@ -54,9 +99,15 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Movie Search
           </Typography>
-          <Button href="/login" color="inherit">
-            Login
-          </Button>
+          {userName.length > 0 ? (
+            <Button onClick={handleLogout} color="inherit">
+              Logout
+            </Button>
+          ) : (
+            <Button href="/login" color="inherit">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

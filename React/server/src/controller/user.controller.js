@@ -62,3 +62,7 @@ exports.postUser = async (req, res) => {
     }
 }
 
+exports.postLogout = (req, res) => {
+    res.json({ status: 'success', message: 'User logged out successfully' });
+}
+
