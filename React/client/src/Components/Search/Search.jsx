@@ -1,15 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import "./Style/Btn.css";
+import "../Style/Btn.css";
 
-import { StyledForm, StyledInput, StyledLabel } from "./Style/Search.styled";
+import { StyledForm, StyledInput, StyledLabel } from "./Search.styled";
 
-function Search({ setSearch }) {
+function Search({ setSearch}) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearch(inputValue);
+   
   };
 
   const handleChange = (e) => {

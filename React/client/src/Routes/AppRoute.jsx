@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Card from "../Components/Card/Card";
-import Search from "../Components/Search";
+import Search from "../Components/Search/Search";
 import Header from "../Components/Header/Header";
 import Login from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 import About from "../Components/About/About";
+import { ToastContainer } from "react-toastify";
 
 //import "./App.css";
 
@@ -18,13 +19,16 @@ function App() {
 
   const fetchData = async () => {
     setMovie([]);
-    const response = await fetch(url);
-    const data = await response.json();
-    setMovie(data);
+    if (search) {
+      const response = await fetch(url);
+      const data = await response.json();
+      setMovie(data);
+    } else {
+      setMovie([]);
+    }
   };
 
   useEffect(() => {
-    
     fetchData();
   }, [search]);
 
@@ -32,6 +36,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Header />
+
         <Routes>
           <Route
             path="/"

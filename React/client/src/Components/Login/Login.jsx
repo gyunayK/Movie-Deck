@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,58 +11,53 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
+import { defaultTheme } from "./LoginTheme";
 
-
-
-const defaultTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#ffffff",
-    },
-    text: {
-      primary: "#ffffff", 
-    },
-  },
-  components: {
-    MuiInput: {
-      styleOverrides: {
-        input: {
-          color: "#ffffff", // Input text color
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: "#ffffff", // Input label color
-        },
-      },
-    },
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: "transparent",
-        },
-      },
-    },
-  },
-});
+import { toast } from "react-toastify";
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const port = import.meta.env.VITE_PORT;
+  const url = `http://localhost:${port}/user/login`;
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     });
+
+    const data = await response.json();
+    if (data.user) {
+      toast.success("Logged in successfully");
+      localStorage.setItem("user", data.user);
+      localStorage.setItem("userName", data.firstName);
+      console.log(data);
+      // window.location.href = "/";
+    } else {
+      toast.error("Invalid credentials");
+    }
+    console.log(data);
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth={false} sx={{  height: '100vh', width:'100%' }}>
+      <Container
+        component="main"
+        maxWidth={false}
+        sx={{ height: "100vh", width: "100%" }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -79,7 +74,7 @@ export default function SignIn() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleLogin}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -90,6 +85,8 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
               autoFocus
             />
@@ -98,6 +95,8 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               label="Password"
               type="password"
               id="password"
@@ -129,7 +128,6 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        
       </Container>
     </ThemeProvider>
   );

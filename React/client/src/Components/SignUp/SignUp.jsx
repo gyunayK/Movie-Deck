@@ -1,65 +1,71 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { defaultTheme } from "./SignUpTheme";
 
-// TODO remove, this demo shouldn't need to reset the theme.
+import { useNavigate } from "react-router-dom";
 
-const defaultTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#ffffff",
-    },
-    text: {
-      primary: "#ffffff", 
-    },
-  },
-  components: {
-    MuiInput: {
-      styleOverrides: {
-        input: {
-          color: "#ffffff", // Input text color
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: "#ffffff", // Input label color
-        },
-      },
-    },
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: "transparent",
-        },
-      },
-    },
-  },
-});
-
+import { toast } from "react-toastify";
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const port = import.meta.env.VITE_PORT;
+  const url = `http://localhost:${port}/user/register`;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        // check if HTTP response status code is not successful
+        const data = await response.json(); // parse the response to JSON
+        if (response.status === 420) {
+          toast.error("User with this email already exists");
+          return;
+        } else {
+          toast.error("Invalid credentials");
+          return;
+        }
+      }
+
+      // If everything goes well, navigate to "/login"
+      toast.success("Registered successfully");
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred, please try again later.");
+    }
   };
 
   return (
@@ -69,23 +75,30 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   required
                   fullWidth
                   id="firstName"
@@ -100,6 +113,8 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -110,6 +125,8 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                 />
               </Grid>
@@ -118,6 +135,8 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"
@@ -126,7 +145,9 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>

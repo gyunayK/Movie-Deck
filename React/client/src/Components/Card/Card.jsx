@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Figure, Notfound } from "../Style/Card.styled";
+import { Figure, Notfound } from "./Card.styled";
 import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
 

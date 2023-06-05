@@ -4,13 +4,18 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URL, )
 
 const movieRouter = require('./src/routers/movie.router')
+const userRouter = require('./src/routers/user.router')
 
 
 const app = express();
+
 app.use(morgan('dev'))
 app.use(cors())
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 
@@ -19,6 +24,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/movie', movieRouter)
+
+
+app.use('/user', userRouter)
 
 
 
