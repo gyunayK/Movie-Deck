@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <ToastContainer theme="dark" position="top-right" hideProgressBar="true" autoClose="1500" />
     <App />
+    <ToastContainer theme="dark" position="top-right" hideProgressBar="true" autoClose="1500" />
   </>
 );

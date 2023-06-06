@@ -69,8 +69,8 @@ function Card({ movie }) {
   };
 
   const checkFavorite = async () => {
-    if (Object.keys(movie).length === 0 || !movie.Title) {
-       toast.error("Movie not found");
+    if (movie.Error === "Movie not found!") {
+      toast.error("Movie not found");
       return;
     }
 
@@ -85,7 +85,6 @@ function Card({ movie }) {
     console.log(data);
 
     if (data.message === "Movie is already in favorites") {
-      toast.success("Movie is already in favorites");
       setIsFavorite(true);
     } else if (data.message === "Movie is not in favorites") {
       setIsFavorite(false);
@@ -94,7 +93,6 @@ function Card({ movie }) {
 
   useEffect(() => {
     checkFavorite();
-    console.log(movie);
   }, [movie]);
 
   // rest of your component
@@ -104,7 +102,7 @@ function Card({ movie }) {
         <Figure>
           <img src={loadingImage} alt="loading animation" id="beforeLoad" />
         </Figure>
-      ) : movie && movie.Title ? (
+      ) : movie && !movie.Error ? (
         <Figure>
           {isFavorite ? (
             <button onClick={handleRemoveFavorite}>
@@ -125,7 +123,7 @@ function Card({ movie }) {
           </figcaption>
         </Figure>
       ) : (
-        <Notfound>Movie Not Found</Notfound>
+        ""
       )}
     </>
   );

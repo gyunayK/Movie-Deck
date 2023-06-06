@@ -7,8 +7,7 @@ import Login from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 import About from "../Components/About/About";
 import { ToastContainer } from "react-toastify";
-
-//import "./App.css";
+import Favorites from "../Components/Favorites/Favorites";
 
 function App() {
   const [movie, setMovie] = useState([]);
@@ -34,7 +33,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className="BIGWRAPPER">
         <Header />
 
         <Routes>
@@ -50,6 +49,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/favorites" element={<Favorites />} />
+
         </Routes>
       </div>
     </BrowserRouter>

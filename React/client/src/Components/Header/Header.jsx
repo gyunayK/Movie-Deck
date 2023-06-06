@@ -58,6 +58,7 @@ export default function Header() {
   };
 
   return (
+    
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
@@ -66,7 +67,7 @@ export default function Header() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 1 }}
             onClick={handleClick}
           >
             <MenuIcon />
@@ -83,11 +84,11 @@ export default function Header() {
                 Signed in as: {userName}
               </MenuItem>
             )}
-            <MenuItem onClick={handleClose} component={Link} to="/favorites">
-              View Favorites List
-            </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/">
               Search For a Movie
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/favorites">
+              View Favorites List
             </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/about">
               About

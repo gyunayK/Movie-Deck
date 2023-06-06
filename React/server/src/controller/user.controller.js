@@ -157,3 +157,27 @@ exports.getFavorite = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
+
+
+exports.getFavoriteList = async (req, res) => {
+    const token = req.headers.authorization.split(" ")[1];
+    try {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decodedToken.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+
+        res.status(200).json({ message: 'Favorites list', favorites: user.favorites });
+
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+        
+    }
+
+    
+}
