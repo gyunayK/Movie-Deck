@@ -79,15 +79,13 @@ export default function Header() {
             onClose={handleClose}
           >
             {userName.length > 0 && (
-              <>
-                <MenuItem onClick={handleClose} component={Link} to="/">
-                  Signed in as: {userName}
-                </MenuItem>
-                <MenuItem onClick={handleClose} component={Link} to="/favorites">
-                  View Favorites List
-                </MenuItem>
-              </>
+              <MenuItem onClick={handleClose} component={Link} to="/">
+                Signed in as: {userName}
+              </MenuItem>
             )}
+            <MenuItem onClick={handleClose} component={Link} to="/favorites">
+              View Favorites List
+            </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/">
               Search For a Movie
             </MenuItem>

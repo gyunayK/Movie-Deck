@@ -39,16 +39,17 @@ export default function SignIn() {
     });
 
     const data = await response.json();
+    
     if (data.user) {
       toast.success("Logged in successfully");
       localStorage.setItem("user", data.user);
       localStorage.setItem("userName", data.firstName);
-      console.log(data);
+  
        window.location.href = "/";
     } else {
       toast.error("Invalid credentials");
     }
-    console.log(data);
+
   };
 
   return (

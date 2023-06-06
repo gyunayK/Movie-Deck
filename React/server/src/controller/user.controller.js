@@ -23,6 +23,7 @@ exports.getUser = async (req, res) => {
 
     if (user) {
         const token = jwt.sign({
+            id: user._id,
             email: user.email,
             password: user.password,
         }, process.env.JWT_SECRET)
@@ -66,3 +67,93 @@ exports.postLogout = (req, res) => {
     res.json({ status: 'success', message: 'User logged out successfully' });
 }
 
+exports.postFavorite = async (req, res) => {
+    const token = req.body.token;
+    const movie = req.body.movie;
+
+    try {
+        // Verify the token and get the user
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decodedToken.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Check if the movie is already in favorites
+        if (user.favorites && user.favorites.some(favMovie => favMovie.imdbID === movie.imdbID)) {
+            return res.status(400).json({ message: 'Movie is already in favorites' });
+        }
+
+        // Add movie to user's favorites
+        user.favorites = [...user.favorites, movie];
+        await user.save();
+
+        return res.status(200).json({ message: 'Movie added to favorites' });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
+
+
+
+exports.deleteFavorite = async (req, res) => {
+    const token = req.body.token;
+    const movie = req.body.movie;
+
+    try {
+        // Verify the token and get the user
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decodedToken.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Check if the movie is already in favorites
+        const movieInFavorites = user.favorites.find(fav => fav.imdbID === movie.imdbID);
+        if (!movieInFavorites) {
+            return res.status(400).json({ message: 'Movie is not in favorites' });
+        }
+
+        // Remove movie from user's favorites
+        user.favorites = user.favorites.filter(fav => fav.imdbID !== movie.imdbID);
+        await user.save();
+
+        return res.status(200).json({ message: 'Movie removed from favorites' });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+exports.getFavorite = async (req, res) => {
+    const token = req.headers.authorization.split(" ")[1];
+    const movieId = req.params.id;
+
+    try {
+        // Verify the token and get the user
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decodedToken.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Check if the movie is already in favorites
+        if (user.favorites && user.favorites.some(favMovie => favMovie.imdbID === movieId)) {
+            return res.status(200).json({ message: 'Movie is already in favorites' });
+        }
+
+        // If the movie is not in favorites, respond accordingly
+        return res.status(404).json({ message: 'Movie is not in favorites' });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};

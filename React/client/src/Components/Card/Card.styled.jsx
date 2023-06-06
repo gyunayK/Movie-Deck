@@ -5,6 +5,8 @@ const BaseDuration = "500ms";
 export const Figure = styled.figure`
   position: relative;
   display: flex;
+  user-select: none;
+
   align-items: center;
   justify-content: center;
   width: 375px;
@@ -15,6 +17,16 @@ export const Figure = styled.figure`
   transition: all ${BaseDuration} cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
   margin: 0 auto;
+  
+  .card_icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 45px;
+    z-index: 100;
+    cursor: pointer;
+    color: #e4163a;
+  }
 
   #beforeLoad{
     height: 100%;
