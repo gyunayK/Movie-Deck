@@ -9,14 +9,16 @@ export const Figure = styled.figure`
 
   align-items: center;
   justify-content: center;
-  width: 375px;
-  min-width: 375px;
+  max-width: 400px;
+
   height: 600px;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all ${BaseDuration} cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
   margin: 0 auto;
+
+
   
   .card_icon{
     position: absolute;
@@ -57,33 +59,15 @@ export const Figure = styled.figure`
     }
   }
 
-  h1 {
-    position: absolute;
-    top: 50px;
-    left: 20px;
-    margin: 0;
-    padding: 0;
-    color: white;
-    fontweight: bold;
-    font-size: 60px;
-    font-weight: 200;
-    line-height: 1;
-    opacity: 1;
-    transform: scale(1);
-    transition: 0.25s ease;
-    z-index: 999;
-  }
-
   img {
     height: 100%;
     width: 100%;
     transition: 0.25s;
-
   }
 
   figcaption {
     position: absolute;
-    bottom: -34%;
+    bottom: -37%;
     left: 0;
     width: 100%;
     margin: 0;
@@ -103,6 +87,11 @@ export const Figure = styled.figure`
       font-size: 14px;
       line-height: 1.75;
     }
+  }
+
+  @media screen and (max-width: 450px) {
+    margin: 4px ;
+    margin-bottom: 20px;
   }
 `;
 

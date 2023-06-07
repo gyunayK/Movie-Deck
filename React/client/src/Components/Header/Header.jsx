@@ -58,7 +58,6 @@ export default function Header() {
   };
 
   return (
-    
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
@@ -96,14 +95,14 @@ export default function Header() {
           </Menu>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Movie Search
+            MovieDeck
           </Typography>
           {userName.length > 0 ? (
-            <Button onClick={handleLogout} color="inherit">
+            <Button onClick={handleLogout} color="inherit" sx={{ fontSize: 18 }}>
               Logout
             </Button>
           ) : (
-            <Button href="/login" color="inherit">
+            <Button href="/login" color="inherit" >
               Login
             </Button>
           )}

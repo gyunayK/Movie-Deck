@@ -6,7 +6,6 @@ export const Figure = styled.figure`
   position: relative;
   display: flex;
   user-select: none;
-
   align-items: center;
   justify-content: center;
   width: 375px;
@@ -18,15 +17,7 @@ export const Figure = styled.figure`
   overflow: hidden;
   margin: 0 auto;
   
-  .card_icon{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 45px;
-    z-index: 100;
-    cursor: pointer;
-    color: #e4163a;
-  }
+ 
 
   #beforeLoad{
     height: 100%;
@@ -83,7 +74,7 @@ export const Figure = styled.figure`
 
   figcaption {
     position: absolute;
-    bottom: -34%;
+    bottom: -37%;
     left: 0;
     width: 100%;
     margin: 0;

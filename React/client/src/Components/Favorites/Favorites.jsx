@@ -50,8 +50,7 @@ function Favorites() {
   }, [deleted]);
 
   return (
-    <div>
-      <h1>Favorites</h1>
+    <>
       <div className="gridContainer">
         {favorites.map((movie) => (
           <div key={movie.imdbID} className="cardWrapper">
@@ -59,7 +58,7 @@ function Favorites() {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

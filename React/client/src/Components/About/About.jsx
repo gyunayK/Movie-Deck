@@ -13,7 +13,6 @@ function About() {
             <li><strong>Frontend:</strong> I used React.js to create an easy-to-use interface. Styled-components were used to make everything look nice and polished.</li>
             <li><strong>Backend:</strong> On the backend, I used Node.js and Express.js. This allows the app to process requests like searching for a movie or adding a movie to your favorites.</li>
             <li><strong>Database:</strong> MongoDB is the app's storage unit. It's where all the data, like your list of favorite movies, is stored.</li>
-            <li><strong>State Management:</strong> Redux helps keep track of changes made within the app.</li>
             <li><strong>Authentication:</strong> To keep your data secure, I used JSON Web Tokens. It's like a passcode that makes sure only you can access your data.</li>
         </ul>
 

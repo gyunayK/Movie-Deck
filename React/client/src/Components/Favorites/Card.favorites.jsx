@@ -15,7 +15,6 @@ function Card({ movie, handleRemoveFavorite }) {
   const port = import.meta.env.VITE_PORT;
   const url = `http://localhost:${port}/user/favorite`;
 
-
   // const handleRemoveFavorite = async (e) => {
   //   e.preventDefault();
   //   if (Object.keys(movie).length === 0) {
@@ -43,7 +42,6 @@ function Card({ movie, handleRemoveFavorite }) {
   //   }
   // };
 
-
   return (
     <>
       {movie.length === 0 ? (
@@ -51,25 +49,27 @@ function Card({ movie, handleRemoveFavorite }) {
           <img src={loadingImage} alt="loading animation" id="beforeLoad" />
         </Figure>
       ) : movie && movie.Title ? (
-        <Figure>
-          {isFavorite ? (
-            <button onClick={() => handleRemoveFavorite(movie)}>
-              <MdOutlineFavorite className="card_icon" />
-            </button>
-          ) : (
-            <button >
-              <MdOutlineFavoriteBorder className="card_icon" />
-            </button>
-          )}
+        <div className="cardFavWrapper">
+            {isFavorite ? (
+              <button  className="card_icon" onClick={() => handleRemoveFavorite(movie)}>
+                <MdOutlineFavorite />
+              </button>
+            ) : (
+              <button>
+                <MdOutlineFavoriteBorder className="card_icon" />
+              </button>
+            )}
+          <Figure>
 
-          <img className="cardL" src={posterSrc} alt={movie.Title} />
-          <figcaption>
-            <h3>Info</h3>
-            <p>Year: {movie.Year}</p>
-            <p>IMBd rating: {movie.imdbRating}</p>
-            <p>Genre: {movie.Genre}</p>
-          </figcaption>
-        </Figure>
+            <img className="cardL" src={posterSrc} alt={movie.Title} />
+            <figcaption>
+              <h3>Info</h3>
+              <p>Year: {movie.Year}</p>
+              <p>IMBd rating: {movie.imdbRating}</p>
+              <p>Genre: {movie.Genre}</p>
+            </figcaption>
+          </Figure>
+        </div>
       ) : (
         <Notfound>Movie Not Found</Notfound>
       )}

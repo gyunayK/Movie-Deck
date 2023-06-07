@@ -4,6 +4,8 @@ import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
 import { toast } from "react-toastify";
 
+import "./card.style.css"
+
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 function Card({ movie }) {
@@ -103,25 +105,26 @@ function Card({ movie }) {
           <img src={loadingImage} alt="loading animation" id="beforeLoad" />
         </Figure>
       ) : movie && !movie.Error ? (
-        <Figure>
+        <div className="cardWrapper">
           {isFavorite ? (
-            <button onClick={handleRemoveFavorite}>
-              <MdOutlineFavorite className="card_icon" />
+            <button className="card_icon" onClick={handleRemoveFavorite}>
+              <MdOutlineFavorite />
             </button>
           ) : (
-            <button onClick={handleFavorite}>
-              <MdOutlineFavoriteBorder className="card_icon" />
+            <button className="card_icon" onClick={handleFavorite}>
+              <MdOutlineFavoriteBorder />
             </button>
           )}
-
-          <img className="cardL" src={posterSrc} alt={movie.Title} />
-          <figcaption>
-            <h3>Info</h3>
-            <p>Year: {movie.Year}</p>
-            <p>IMBd rating: {movie.imdbRating}</p>
-            <p>Genre: {movie.Genre}</p>
-          </figcaption>
-        </Figure>
+          <Figure>
+            <img className="cardL" src={posterSrc} alt={movie.Title} />
+            <figcaption>
+              <h3>Info</h3>
+              <p>Year: {movie.Year}</p>
+              <p>IMBd rating: {movie.imdbRating}</p>
+              <p>Genre: {movie.Genre}</p>
+            </figcaption>
+          </Figure>
+        </div>
       ) : (
         ""
       )}
