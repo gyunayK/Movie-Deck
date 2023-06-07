@@ -45,7 +45,7 @@ exports.postUser = async (req, res) => {
 
         if (existingUser) {
             // If a user with the same email exists, return an error response
-            return res.status(420).json({ status: 'error', error: 'User with this email already exists' });
+            return res.json({ status: 'error', error: 'User with this email already exists' });
         }
 
         const newUser = new User({

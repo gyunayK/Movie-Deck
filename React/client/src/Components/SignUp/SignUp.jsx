@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -11,8 +9,9 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 import { defaultTheme } from "./SignUpTheme";
 
@@ -20,37 +19,57 @@ import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useForm } from "react-hook-form";
+import { CircularProgress } from "@mui/material";
+
 export default function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
-
   const port = import.meta.env.VITE_PORT;
   const url = `http://localhost:${port}/user/register`;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const schema = z
+    .object({
+      firstName: z.string().min(2, { message: "First name is too short" }),
+      lastName: z.string().min(2, { message: "Last name is too short" }),
+      email: z.string().email({ message: "Invalid email" }),
+      password: z.string().min(8, { message: "Password is too short" }),
+      confirmPass: z.string().min(8, { message: "Password is too short" }),
+    })
+    .refine((data) => data.password === data.confirmPass, {
+      message: "Passwords do not match",
+      path: ["confirmPass"],
+    });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
+  const handleSignUp = async (formData) => {
+    // await new Promise((resolve) =>
+    //   setTimeout(() => {
+    //     console.log(data);
+    //   }, 1500)
+    // );
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-        }),
+        body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
         // check if HTTP response status code is not successful
         const data = await response.json(); // parse the response to JSON
-        if (response.status === 420) {
+        if (data.error === "User with this email already exists") {
           toast.error("User with this email already exists");
           return;
         } else {
@@ -89,35 +108,39 @@ export default function SignUp() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit((formData) => handleSignUp(formData))}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  {...register("firstName")}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {errors.firstName && (
+                <p className="error">{errors.firstName.message}</p>
+              )}
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
                   autoComplete="family-name"
+                  {...register("lastName")}
                 />
               </Grid>
+              {errors.lastName && (
+                <p className="error">{errors.lastName.message}</p>
+              )}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -125,24 +148,41 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
+                  {...register("email")}
                 />
               </Grid>
+              {errors.email && <p className="error">{errors.email.message}</p>}
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  {...register("password")}
                 />
               </Grid>
+              {errors.password && (
+                <p className="error">{errors.password.message}</p>
+              )}
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="new-password"
+                  {...register("confirmPass")}
+                />
+              </Grid>
+              {errors.confirmPass && (
+                <p className="error">{errors.confirmPass.message}</p>
+              )}
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
@@ -152,14 +192,19 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Button
+
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              loading={isSubmitting}
+              size="large"
+              loadingIndicator={<CircularProgress size={35} color="primary" />}
             >
               Sign Up
-            </Button>
+            </LoadingButton>
+
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">

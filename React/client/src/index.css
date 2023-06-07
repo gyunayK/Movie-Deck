@@ -51,3 +51,26 @@ body {
   margin: 0;
   padding: 0;
 }
+.error{
+  color: rgb(250, 206, 206);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  margin-left: 24px;
+}
+
+.submitBTN{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 24px;
+  margin-right: 24px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: rgb(63, 214, 251);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
