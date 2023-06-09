@@ -3,13 +3,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LoadingButton from "@mui/lab/LoadingButton";
+import MenuItem from "@mui/material/MenuItem";
 import { CircularProgress } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -49,6 +50,7 @@ export default function SignUp() {
   });
 
   const handleSignUp = async (formData) => {
+    console.log(isSubmitting);
     const { firstName, lastName, email, password } = formData;
 
     try {
@@ -202,9 +204,9 @@ export default function SignUp() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <MenuItem to="/login"  component={Link}  variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </MenuItem>
               </Grid>
             </Grid>
           </Box>
