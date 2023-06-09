@@ -13,14 +13,15 @@ import { toast } from "react-toastify";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [userName, setUserName] = useState("");
+  const [userNames, setUserNames] = useState("");
 
   useEffect(() => {
     const checkIfLoggedIn = () => {
-      const storedUserName = localStorage.getItem("userName");
-      if (storedUserName) {
-        setUserName(storedUserName);
-        toast.success(`Welcome back ${storedUserName}!`);
+      const storedUserNames = JSON.parse(localStorage.getItem("userName"));
+
+      if (storedUserNames) {
+        setUserNames(storedUserNames);
+        toast.success(`Welcome back ${storedUserNames.firstName}!`);
       }
     };
     checkIfLoggedIn();
@@ -54,7 +55,8 @@ export default function Header() {
     toast.success("Logged out successfully");
     localStorage.removeItem("userName");
     localStorage.removeItem("user");
-    setUserName("");
+    setUserNames("");
+    
   };
 
   return (
@@ -78,17 +80,22 @@ export default function Header() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {userName.length > 0 && (
+            {userNames && (
               <MenuItem onClick={handleClose} component={Link} to="/">
-                Signed in as: {userName}
+                {userNames.firstName} {userNames.lastName}
               </MenuItem>
             )}
             <MenuItem onClick={handleClose} component={Link} to="/">
               Search For a Movie
             </MenuItem>
-            <MenuItem onClick={handleClose} component={Link} to="/favorites">
+            <MenuItem
+              onClick={handleClose}
+              component={Link}
+              to={userNames ? "/favorites" : "/login"}
+            >
               View Favorites List
             </MenuItem>
+
             <MenuItem onClick={handleClose} component={Link} to="/about">
               About
             </MenuItem>
@@ -97,12 +104,16 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             MovieDeck
           </Typography>
-          {userName.length > 0 ? (
-            <Button onClick={handleLogout} color="inherit" sx={{ fontSize: 18 }}>
+          {userNames ? (
+            <Button
+              onClick={handleLogout}
+              color="inherit"
+              sx={{ fontSize: 16 }}
+            >
               Logout
             </Button>
           ) : (
-            <Button href="/login" color="inherit" >
+            <Button href="/login" sx={{ fontSize: 16 }} color="inherit">
               Login
             </Button>
           )}

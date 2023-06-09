@@ -1,6 +1,7 @@
 
 const User = require('../model/user.model');
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
 
 const mongoURL = process.env.MONGO_URL;
@@ -16,52 +17,66 @@ mongoose.connect(mongoURL, {
 
 
 exports.getUser = async (req, res) => {
-    const user = await User.findOne({
-        email: req.body.email,
-        password: req.body.password,
-    })
-
-    if (user) {
-        const token = jwt.sign({
-            id: user._id,
-            email: user.email,
-            password: user.password,
-        }, process.env.JWT_SECRET)
-
-        res.json({ status: 'success', user: token, firstName: user.firstName });
-    } else {
-        res.json({ status: 'error', user: false });
-    }
-}
-
-exports.postUser = async (req, res) => {
-    console.log(req.body);
-
-    const email = req.body.email;
-
     try {
-        // Check if a user with the same email already exists
-        const existingUser = await User.findOne({ email: email });
+        // Find user by email
+        const user = await User.findOne({ email: req.body.email });
 
-        if (existingUser) {
-            // If a user with the same email exists, return an error response
-            return res.json({ status: 'error', error: 'User with this email already exists' });
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
         }
 
+        // Check if password is correct
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+
+        if (!validPassword) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // If all checks pass, create and return a JWT
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+        return res.json({ status: 'success', user: token, firstName: JSON.stringify({ firstName: user.firstName, lastName: user.lastName }) });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+// User model should be defined or imported here
+// const User = require('path_to_your_user_model');
+
+exports.postUser = async (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const newUser = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: email,
-            password: req.body.password,
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword
         });
 
-        await newUser.save();  // Save to database
+        await newUser.save();
 
-        res.json({ status: 'success', message: 'User created successfully' });
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+
+        return res.status(201).json({ token });
+
     } catch (err) {
-        res.json({ status: 'error', error: err });
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
     }
 }
+
 
 exports.postLogout = (req, res) => {
     res.json({ status: 'success', message: 'User logged out successfully' });
@@ -150,7 +165,7 @@ exports.getFavorite = async (req, res) => {
         }
 
         // If the movie is not in favorites, respond accordingly
-        return res.status(404).json({ message: 'Movie is not in favorites' });
+        return res.json({ message: 'Movie is not in favorites' });
 
     } catch (err) {
         console.error(err);
@@ -176,8 +191,8 @@ exports.getFavoriteList = async (req, res) => {
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Server error' });
-        
+
     }
 
-    
+
 }

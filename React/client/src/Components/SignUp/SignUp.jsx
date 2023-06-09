@@ -25,6 +25,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CircularProgress } from "@mui/material";
 
+
+
 export default function SignUp() {
   const navigate = useNavigate();
   const port = import.meta.env.VITE_PORT;
@@ -35,8 +37,8 @@ export default function SignUp() {
       firstName: z.string().min(2, { message: "First name is too short" }),
       lastName: z.string().min(2, { message: "Last name is too short" }),
       email: z.string().email({ message: "Invalid email" }),
-      password: z.string().min(8, { message: "Password is too short" }),
-      confirmPass: z.string().min(8, { message: "Password is too short" }),
+      password: z.string().min(12, { message: "Password is too short" }),
+      confirmPass: z.string().min(12, { message: "Password is too short" }),
     })
     .refine((data) => data.password === data.confirmPass, {
       message: "Passwords do not match",
@@ -52,30 +54,30 @@ export default function SignUp() {
   });
 
   const handleSignUp = async (formData) => {
-    // await new Promise((resolve) =>
-    //   setTimeout(() => {
-    //     console.log(data);
-    //   }, 1500)
-    // );
+    const { firstName, lastName, email, password } = formData;
+
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(
+          {
+            firstName,
+            lastName,
+            email,
+            password,
+          },
+        ),
       });
-
-      if (response.ok) {
-        // check if HTTP response status code is not successful
-        const data = await response.json(); // parse the response to JSON
-        if (data.error === "User with this email already exists") {
-          toast.error("User with this email already exists");
-          return;
-        } else {
-          toast.error("Invalid credentials");
-          return;
-        }
+      
+      const data = await response.json(); // parse the response to JSON
+      if (!response.ok) { // this is true when status code is not 2xx
+        // Here, we are giving priority to server error message
+        const errorMsg = data.message || "An error occurred, please try again later.";
+        toast.error(errorMsg);
+        return;
       }
 
       // If everything goes well, navigate to "/login"
@@ -85,7 +87,8 @@ export default function SignUp() {
       console.error(err);
       toast.error("An error occurred, please try again later.");
     }
-  };
+};
+
 
   return (
     <ThemeProvider theme={defaultTheme}>

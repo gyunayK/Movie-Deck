@@ -4,16 +4,16 @@ import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
 import { toast } from "react-toastify";
 
-import "./card.style.css"
+import "./card.style.css";
 
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 function Card({ movie }) {
   const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
   const [isFavorite, setIsFavorite] = useState(false);
+  const [user, setUser] = useState({});
 
   const token = localStorage.getItem("user");
-
   const port = import.meta.env.VITE_PORT;
   const url = `http://localhost:${port}/user/favorite`;
 
@@ -36,7 +36,6 @@ function Card({ movie }) {
     });
 
     const data = await response.json();
-    console.log(data);
     if (data.message === "Movie added to favorites") {
       toast.success("Movie added to favorites");
       setIsFavorite(true);
@@ -62,7 +61,6 @@ function Card({ movie }) {
     });
 
     const data = await response.json();
-    console.log(data);
 
     if (data.message === "Movie removed from favorites") {
       toast.success("Movie removed from favorites");
@@ -84,7 +82,6 @@ function Card({ movie }) {
     });
 
     const data = await response.json();
-    console.log(data);
 
     if (data.message === "Movie is already in favorites") {
       setIsFavorite(true);
@@ -94,7 +91,12 @@ function Card({ movie }) {
   };
 
   useEffect(() => {
-    checkFavorite();
+    if (token === null) {
+      setUser(false);
+    } else {
+      setUser(true);
+      checkFavorite();
+    }
   }, [movie]);
 
   // rest of your component
@@ -106,15 +108,14 @@ function Card({ movie }) {
         </Figure>
       ) : movie && !movie.Error ? (
         <div className="cardWrapper">
-          {isFavorite ? (
-            <button className="card_icon" onClick={handleRemoveFavorite}>
-              <MdOutlineFavorite />
+          {user ? (
+            <button
+              className="card_icon"
+              onClick={isFavorite ? handleRemoveFavorite : handleFavorite}
+            >
+              {isFavorite ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
             </button>
-          ) : (
-            <button className="card_icon" onClick={handleFavorite}>
-              <MdOutlineFavoriteBorder />
-            </button>
-          )}
+          ) : null}
           <Figure>
             <img className="cardL" src={posterSrc} alt={movie.Title} />
             <figcaption>
@@ -125,9 +126,7 @@ function Card({ movie }) {
             </figcaption>
           </Figure>
         </div>
-      ) : (
-        ""
-      )}
+      ) : null}
     </>
   );
 }

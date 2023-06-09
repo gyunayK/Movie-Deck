@@ -8,18 +8,15 @@ export const Figure = styled.figure`
   user-select: none;
   align-items: center;
   justify-content: center;
-  width: 375px;
-  min-width: 375px;
-  height: 600px;
+  max-width: 400px;
+  height: 500px;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all ${BaseDuration} cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
   margin: 0 auto;
-  
- 
 
-  #beforeLoad{
+  #beforeLoad {
     height: 100%;
     width: 100%;
     transition: 0.25s;
@@ -27,7 +24,6 @@ export const Figure = styled.figure`
     background-repeat: no-repeat;
     background-position: center;
   }
-
 
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -39,9 +35,7 @@ export const Figure = styled.figure`
 
     img {
       transform: scale(1.25);
-      
     }
-  
 
     figcaption {
       bottom: 0;
@@ -74,7 +68,7 @@ export const Figure = styled.figure`
 
   figcaption {
     position: absolute;
-    bottom: -37%;
+    bottom: -45%;
     left: 0;
     width: 100%;
     margin: 0;

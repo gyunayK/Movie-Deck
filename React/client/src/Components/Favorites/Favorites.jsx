@@ -51,13 +51,21 @@ function Favorites() {
 
   return (
     <>
-      <div className="gridContainer">
-        {favorites.map((movie) => (
-          <div key={movie.imdbID} className="cardWrapper">
-            <Card movie={movie} handleRemoveFavorite={handleRemoveFavorite} />
+      {favorites && favorites.length > 0 && (
+        <div className="gridContainer">
+          {favorites.map((movie) => (
+            <div key={movie.imdbID} className="cardWrapper">
+              <Card movie={movie} handleRemoveFavorite={handleRemoveFavorite} />
+            </div>
+          ))}
+        </div>
+      )}
+      {!favorites ||
+        (favorites.length === 0 && (
+          <div className="noFavorites">
+            <h1>Your list is empty!</h1>
           </div>
         ))}
-      </div>
     </>
   );
 }
