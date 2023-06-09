@@ -104,17 +104,22 @@ export default function Header() {
             MovieDeck
           </Typography>
           {userNames ? (
-            <Button
+            <MenuItem
               onClick={handleLogout}
               color="inherit"
-              sx={{ fontSize: 16 }}
+              sx={{ fontSize: 20 }}
             >
               Logout
-            </Button>
+            </MenuItem>
           ) : (
-            <Button href="/login" sx={{ fontSize: 16 }} color="inherit">
+            <MenuItem
+              component={Link}
+              to="/login"
+              sx={{ fontSize: 20 }}
+              color="inherit"
+            >
               Login
-            </Button>
+            </MenuItem>
           )}
         </Toolbar>
       </AppBar>
