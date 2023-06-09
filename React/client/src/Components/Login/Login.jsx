@@ -11,44 +11,74 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { CircularProgress } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { defaultTheme } from "./LoginTheme";
 
 import { toast } from "react-toastify";
 
-export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
+
+export default function SignIn() {
+  const navigate = useNavigate();
   const host = import.meta.env.VITE_HOST;
   const url = `${host}/user/login`;
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
 
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+  const schema = z.object({
+    email: z.string().email({ message: "Invalid email" }),
+    password: z.string().min(12, {
+      message: "Password is too short! Must be a minimum of 12 characters.",
+    }),
+  });
 
-    const data = await response.json();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
 
-    if (data.user) {
-      toast.success("Logged in successfully");
-      localStorage.setItem("user", data.user);
-      localStorage.setItem("userName", data.firstName);
+  const handleLogin = async (formData) => {
+    const { email, password } = formData;
 
-      window.location.href = "/";
-    } else {
-      toast.error("Invalid credentials");
-    }
+   try {
+    
+     const response = await fetch(url, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+ 
+       body: JSON.stringify({
+         email,
+         password,
+       }),
+     });
+
+     const data = await response.json();
+
+     if (data.user) {
+       toast.success("Logged in successfully");
+       localStorage.setItem("user", data.user);
+       localStorage.setItem("userName", data.firstName);
+       navigate("/");
+     } else {
+       toast.error("Invalid credentials");
+     }
+   } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+   }
   };
 
   return (
@@ -74,7 +104,7 @@ export default function SignIn() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleLogin}
+            onSubmit={handleSubmit((formData) => handleLogin(formData))}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -85,8 +115,8 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+             
+              {...register("email")}
               autoComplete="email"
               autoFocus
             />
@@ -95,8 +125,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password")}
               label="Password"
               type="password"
               id="password"
@@ -106,14 +135,17 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              loading={isSubmitting}
+              size="large"
+              loadingIndicator={<CircularProgress size={35} color="primary" />}
             >
-              Sign In
-            </Button>
+              Log in
+            </LoadingButton>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
