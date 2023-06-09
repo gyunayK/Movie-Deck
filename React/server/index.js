@@ -4,12 +4,9 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URL, )
 
 const movieRouter = require('./src/routers/movie.router')
 const userRouter = require('./src/routers/user.router')
-
 
 const app = express();
 
@@ -25,10 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/movie', movieRouter)
 
-
 app.use('/user', userRouter)
-
-
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);

@@ -18,9 +18,7 @@ export const Figure = styled.figure`
   overflow: hidden;
   margin: 0 auto;
 
-
-  
-  .card_icon{
+  .card_icon {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -30,7 +28,7 @@ export const Figure = styled.figure`
     color: #e4163a;
   }
 
-  #beforeLoad{
+  #beforeLoad {
     height: 100%;
     width: 100%;
     transition: 0.25s;
@@ -38,7 +36,6 @@ export const Figure = styled.figure`
     background-repeat: no-repeat;
     background-position: center;
   }
-
 
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -50,9 +47,7 @@ export const Figure = styled.figure`
 
     img {
       transform: scale(1.25);
-      
     }
-  
 
     figcaption {
       bottom: 0;
@@ -90,7 +85,7 @@ export const Figure = styled.figure`
   }
 
   @media screen and (max-width: 450px) {
-    margin: 4px ;
+    margin: 4px;
     margin-bottom: 20px;
   }
 `;

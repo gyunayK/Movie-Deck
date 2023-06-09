@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 const BaseDuration = "500ms";
 
 export const Figure = styled.figure`

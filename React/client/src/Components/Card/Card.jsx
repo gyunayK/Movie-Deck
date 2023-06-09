@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Figure, Notfound } from "./Card.styled";
+import { Figure } from "./Card.styled";
 import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
 import { toast } from "react-toastify";
@@ -14,8 +14,8 @@ function Card({ movie }) {
   const [user, setUser] = useState({});
 
   const token = localStorage.getItem("user");
-  const port = import.meta.env.VITE_PORT;
-  const url = `http://localhost:${port}/user/favorite`;
+  const host = import.meta.env.VITE_HOST;
+  const url = `${host}/user/favorite`;
 
   const handleFavorite = async (e) => {
     e.preventDefault();
@@ -99,7 +99,6 @@ function Card({ movie }) {
     }
   }, [movie]);
 
-  // rest of your component
   return (
     <>
       {movie.length === 0 ? (

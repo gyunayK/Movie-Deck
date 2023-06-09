@@ -11,8 +11,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { ThemeProvider } from "@mui/material/styles";
 
+import { ThemeProvider } from "@mui/material/styles";
 import { defaultTheme } from "./LoginTheme";
 
 import { toast } from "react-toastify";
@@ -21,8 +21,8 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const port = import.meta.env.VITE_PORT;
-  const url = `http://localhost:${port}/user/login`;
+  const host = import.meta.env.VITE_HOST;
+  const url = `${host}/user/login`;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -39,17 +39,16 @@ export default function SignIn() {
     });
 
     const data = await response.json();
-    
+
     if (data.user) {
       toast.success("Logged in successfully");
       localStorage.setItem("user", data.user);
       localStorage.setItem("userName", data.firstName);
-  
-       window.location.href = "/";
+
+      window.location.href = "/";
     } else {
       toast.error("Invalid credentials");
     }
-
   };
 
   return (

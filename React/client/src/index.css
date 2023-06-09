@@ -51,7 +51,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.error{
+.error {
   color: rgb(250, 206, 206);
   font-size: 0.9rem;
   margin-top: 0.2rem;
@@ -59,7 +59,7 @@ body {
   margin-left: 24px;
 }
 
-.submitBTN{
+.submitBTN {
   margin-top: 1rem;
   margin-bottom: 1rem;
   margin-left: 24px;

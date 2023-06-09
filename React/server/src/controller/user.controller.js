@@ -2,19 +2,9 @@
 const User = require('../model/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
-const mongoose = require('mongoose');
 
-const mongoURL = process.env.MONGO_URL;
-const mongoDBName = process.env.MONGO_NAME;
-console.log(mongoURL, mongoDBName);
-
-mongoose.connect(mongoURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log(err));
-
+const connectToDB = require('../service/mongodb');
+connectToDB();
 
 exports.getUser = async (req, res) => {
     try {
@@ -42,10 +32,6 @@ exports.getUser = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
-
-
-// User model should be defined or imported here
-// const User = require('path_to_your_user_model');
 
 exports.postUser = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
@@ -111,7 +97,6 @@ exports.postFavorite = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 }
-
 
 
 exports.deleteFavorite = async (req, res) => {
@@ -193,6 +178,4 @@ exports.getFavoriteList = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
 
     }
-
-
 }

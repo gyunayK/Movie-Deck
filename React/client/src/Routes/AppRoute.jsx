@@ -6,15 +6,14 @@ import Header from "../Components/Header/Header";
 import Login from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 import About from "../Components/About/About";
-import { ToastContainer } from "react-toastify";
 import Favorites from "../Components/Favorites/Favorites";
 
 function App() {
   const [movie, setMovie] = useState([]);
   const [search, setSearch] = useState("");
 
-  const port = import.meta.env.VITE_PORT;
-  const url = `http://localhost:${port}/movie/search/${search}`;
+  const host = import.meta.env.VITE_HOST;
+  const url = `${host}/movie/search/${search}`;
 
   const fetchData = async () => {
     setMovie([]);
@@ -33,7 +32,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="BIGWRAPPER">
+      <div>
         <Header />
 
         <Routes>
@@ -50,7 +49,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/favorites" element={<Favorites />} />
-
         </Routes>
       </div>
     </BrowserRouter>

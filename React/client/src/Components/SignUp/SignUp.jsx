@@ -10,27 +10,22 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LoadingButton from "@mui/lab/LoadingButton";
-
+import { CircularProgress } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
-import { defaultTheme } from "./SignUpTheme";
-
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
+import { defaultTheme } from "./SignUpTheme";
 import { toast } from "react-toastify";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useForm } from "react-hook-form";
-import { CircularProgress } from "@mui/material";
-
-
-
 export default function SignUp() {
   const navigate = useNavigate();
-  const port = import.meta.env.VITE_PORT;
-  const url = `http://localhost:${port}/user/register`;
+  const host = import.meta.env.VITE_HOST;
+  const url = `${host}/user/register`;
 
   const schema = z
     .object({
@@ -62,20 +57,18 @@ export default function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(
-          {
-            firstName,
-            lastName,
-            email,
-            password,
-          },
-        ),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+        }),
       });
-      
-      const data = await response.json(); // parse the response to JSON
-      if (!response.ok) { // this is true when status code is not 2xx
-        // Here, we are giving priority to server error message
-        const errorMsg = data.message || "An error occurred, please try again later.";
+
+      const data = await response.json();
+      if (!response.ok) {
+        const errorMsg =
+          data.message || "An error occurred, please try again later.";
         toast.error(errorMsg);
         return;
       }
@@ -87,8 +80,7 @@ export default function SignUp() {
       console.error(err);
       toast.error("An error occurred, please try again later.");
     }
-};
-
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>

@@ -14,10 +14,10 @@ export const StyledForm = styled.form`
   margin-top: 2rem;
   height: 200px;
   max-width: 400px;
-  
+
   @media screen and (max-width: 375px) {
-   padding-bottom: 30px;
-   margin: 10px;
+    padding-bottom: 30px;
+    margin: 10px;
   }
 `;
 
@@ -29,7 +29,6 @@ export const StyledLabel = styled.label`
 `;
 
 export const StyledInput = styled.input`
-
   width: 65%;
   padding: 0.6rem;
   border: 2px solid #ccc;
@@ -42,5 +41,3 @@ export const StyledInput = styled.input`
     width: 90%;
   }
 `;
-
-

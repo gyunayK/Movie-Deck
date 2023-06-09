@@ -8,11 +8,10 @@ function Favorites() {
   const [deleted, setDeleted] = useState(false);
 
   const token = localStorage.getItem("user");
+  const host = import.meta.env.VITE_HOST;
 
-  const port = import.meta.env.VITE_PORT;
-
-  const url = `http://localhost:${port}/user/favoritesList`;
-  const removeFavURL = `http://localhost:${port}/user/favorite`;
+  const url = `${host}/user/favoritesList`;
+  const removeFavURL = `${host}/user/favorite`;
 
   const handleRemoveFavorite = async (movie) => {
     const response = await fetch(removeFavURL, {

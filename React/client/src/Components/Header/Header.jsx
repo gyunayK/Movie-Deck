@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -35,8 +36,8 @@ export default function Header() {
     setAnchorEl(null);
   };
   const handleLogout = async () => {
-    const port = import.meta.env.VITE_PORT;
-    const url = `http://localhost:${port}/user/logout`;
+    const host = import.meta.env.VITE_HOST;
+    const url = `${host}/user/logout`;
 
     const response = await fetch(url, {
       method: "POST",
@@ -46,8 +47,7 @@ export default function Header() {
     });
 
     if (!response.ok) {
-      // check if HTTP response status code is not successful
-      const data = await response.json(); // parse the response to JSON
+      const data = await response.json();
       toast.error(data.message);
       return;
     }
@@ -56,7 +56,6 @@ export default function Header() {
     localStorage.removeItem("userName");
     localStorage.removeItem("user");
     setUserNames("");
-    
   };
 
   return (

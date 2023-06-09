@@ -8,6 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <App />
-    <ToastContainer theme="dark" position="top-right" hideProgressBar="true" autoClose="1500" />
+    <ToastContainer
+      theme="dark"
+      position="top-right"
+      hideProgressBar="true"
+      autoClose="1500"
+    />
   </>
 );
