@@ -1,0 +1,26 @@
+.aboutSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  @media screen and (max-width: 1000px) {
+    .aboutSection {
+        max-width: 40rem;
+        box-shadow: none;
+    }
+  }
+  @media screen and (max-width: 420px) {
+    .aboutSection {
+      margin-top: 20px;
+      padding: 10px;
+      box-shadow: none;
+    }
+  }

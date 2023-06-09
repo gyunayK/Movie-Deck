@@ -1,8 +1,6 @@
-import React from "react";
 import { useState } from "react";
-import "../Style/Btn.css";
-
 import { StyledForm, StyledInput, StyledLabel } from "./Search.styled";
+import "../Style/Btn.css";
 
 function Search({ setSearch }) {
   const [inputValue, setInputValue] = useState("");

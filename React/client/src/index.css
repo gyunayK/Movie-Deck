@@ -21,31 +21,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.aboutSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  margin: 0 auto;
-  max-width: fit-content;
-  padding: 1rem;
-  margin-top: 40px;
-  padding: 20px;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-@media screen and (max-width: 999px) {
-  .aboutSection {
-    margin: 2em;
-  }
-}
-@media screen and (max-width: 420px) {
-  .aboutSection {
-    margin-top: 20px;
-    padding: 10px;
-    box-shadow: none;
-  }
-}
+
 
 body {
   margin: 0;

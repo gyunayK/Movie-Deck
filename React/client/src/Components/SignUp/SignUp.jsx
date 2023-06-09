@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LoadingButton from "@mui/lab/LoadingButton";
-import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -204,9 +204,9 @@ export default function SignUp() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <MenuItem to="/login"  component={Link}  variant="body2">
+                <Button to="/login" component={Link}  variant="body2">
                   Already have an account? Sign in
-                </MenuItem>
+                </Button>
               </Grid>
             </Grid>
           </Box>

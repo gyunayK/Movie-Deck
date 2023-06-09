@@ -6,7 +6,6 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
-import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -121,10 +120,10 @@ export default function SignIn() {
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
-                <MenuItem to="/signup" component={Link} variant="body2">
+              <Grid item xs>
+                <Button to="/signup" component={Link} variant="body2">
                   {"Don't have an account? Sign Up"}
-                </MenuItem>
+                </Button>
               </Grid>
             </Grid>
           </Box>

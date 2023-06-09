@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Figure } from "./Card.styled";
+import { toast } from "react-toastify";
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+
 import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
-import { toast } from "react-toastify";
 
 import "./card.style.css";
 
-import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 function Card({ movie }) {
   const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
