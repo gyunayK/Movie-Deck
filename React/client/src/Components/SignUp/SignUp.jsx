@@ -9,8 +9,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import LoadingButton from "@mui/lab/LoadingButton";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { CircularProgress } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -33,8 +33,16 @@ export default function SignUp() {
       firstName: z.string().min(2, { message: "First name is too short" }),
       lastName: z.string().min(2, { message: "Last name is too short" }),
       email: z.string().email({ message: "Invalid email" }),
-      password: z.string().min(12, { message: "Password is too short" }),
-      confirmPass: z.string().min(12, { message: "Password is too short" }),
+      password: z
+        .string()
+        .min(12, {
+          message: "Password is too short! Must be a minimum of 12 characters.",
+        }),
+      confirmPass: z
+        .string()
+        .min(12, {
+          message: "Password is too short! Must be a minimum of 12 characters.",
+        }),
     })
     .refine((data) => data.password === data.confirmPass, {
       message: "Passwords do not match",
@@ -50,7 +58,7 @@ export default function SignUp() {
   });
 
   const handleSignUp = async (formData) => {
-    console.log(isSubmitting);
+    
     const { firstName, lastName, email, password } = formData;
 
     try {
@@ -204,7 +212,7 @@ export default function SignUp() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Button to="/login" component={Link}  variant="body2">
+                <Button to="/login" component={Link} variant="body2">
                   Already have an account? Sign in
                 </Button>
               </Grid>
