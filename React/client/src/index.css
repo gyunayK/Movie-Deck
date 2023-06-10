@@ -29,10 +29,10 @@ body {
 }
 .error {
   color: rgb(250, 206, 206);
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
-  margin-left: 24px;
+  margin-left: 22px;
 }
 
 .submitBTN {

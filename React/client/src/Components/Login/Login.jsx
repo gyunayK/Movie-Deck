@@ -25,13 +25,10 @@ import { defaultTheme } from "./LoginTheme";
 
 import { toast } from "react-toastify";
 
-
-
 export default function SignIn() {
   const navigate = useNavigate();
   const host = import.meta.env.VITE_HOST;
   const url = `${host}/user/login`;
-
 
   const schema = z.object({
     email: z.string().email({ message: "Invalid email" }),
@@ -51,42 +48,47 @@ export default function SignIn() {
   const handleLogin = async (formData) => {
     const { email, password } = formData;
 
-   try {
-    
-     const response = await fetch(url, {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
- 
-       body: JSON.stringify({
-         email,
-         password,
-       }),
-     });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-     const data = await response.json();
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-     if (data.user) {
-       toast.success("Logged in successfully");
-       localStorage.setItem("user", data.user);
-       localStorage.setItem("userName", data.firstName);
-       navigate("/");
-     } else {
-       toast.error("Invalid credentials");
-     }
-   } catch (err) {
+      const data = await response.json();
+
+      if (data.user) {
+        toast.success("Logged in successfully");
+        localStorage.setItem("user", data.user);
+        localStorage.setItem("userName", data.firstName);
+        window.location.href = "/";
+      } else {
+        toast.error("Invalid credentials");
+      }
+    } catch (err) {
       console.log(err);
       toast.error("Something went wrong");
-   }
+    }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container
         component="main"
-        maxWidth={false}
-        sx={{ height: "100vh", width: "100%" }}
+        maxWidth="xs"
+        sx={{
+          marginTop: "10%",
+          backgroundColor: "#fbfbfb",
+          display: "flex",
+          height: "100%",
+          borderRadius: "10px",
+        }}
       >
         <CssBaseline />
         <Box
@@ -96,7 +98,7 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 3, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -106,7 +108,7 @@ export default function SignIn() {
             component="form"
             onSubmit={handleSubmit((formData) => handleLogin(formData))}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 3 }}
           >
             <TextField
               margin="normal"
@@ -115,11 +117,11 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-             
               {...register("email")}
               autoComplete="email"
               autoFocus
             />
+            {errors.email && <p className="error">{errors.email.message}</p>}
             <TextField
               margin="normal"
               required
@@ -131,6 +133,9 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
+            {errors.password && (
+              <p className="error">{errors.password.message}</p>
+            )}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"

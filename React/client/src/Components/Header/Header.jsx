@@ -16,15 +16,15 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [userNames, setUserNames] = useState("");
 
-  useEffect(() => {
-    const checkIfLoggedIn = () => {
-      const storedUserNames = JSON.parse(localStorage.getItem("userName"));
+  const checkIfLoggedIn = () => {
+    const storedUserNames = JSON.parse(localStorage.getItem("userName"));
 
-      if (storedUserNames) {
-        setUserNames(storedUserNames);
-        toast.success(`Welcome back ${storedUserNames.firstName}!`);
-      }
-    };
+    if (storedUserNames) {
+      setUserNames(storedUserNames);
+      toast.success(`Welcome back ${storedUserNames.firstName}!`);
+    }
+  };
+  useEffect(() => {
     checkIfLoggedIn();
   }, []);
 
@@ -103,15 +103,7 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             MovieDeck
           </Typography>
-          {userNames ? (
-            <Button
-              onClick={handleLogout}
-              color="inherit"
-              sx={{ fontSize: 18 }}
-            >
-              Logout
-            </Button>
-          ) : (
+          {!userNames ? (
             <Button
               component={Link}
               to="/login"
@@ -119,6 +111,14 @@ export default function Header() {
               color="inherit"
             >
               Login
+            </Button>
+          ) : (
+            <Button
+              onClick={handleLogout}
+              color="inherit"
+              sx={{ fontSize: 18 }}
+            >
+              Logout
             </Button>
           )}
         </Toolbar>

@@ -4,11 +4,13 @@ const morgan = require('morgan')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const path = require('path')
 
 const movieRouter = require('./src/routers/movie.router')
 const userRouter = require('./src/routers/user.router')
 
 const app = express();
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
 
 app.use(morgan('dev'))
 app.use(cors())

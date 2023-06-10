@@ -5,24 +5,24 @@ import { createTheme } from "@mui/material/styles";
 export const defaultTheme = createTheme({
     palette: {
       primary: {
-        main: "#ffffff",
+        main: "#000000",
       },
       text: {
-        primary: "#ffffff", 
+        primary: "#000000", 
       },
     },
     components: {
       MuiInput: {
         styleOverrides: {
           input: {
-            color: "#ffffff", // Input text color
+            color: "#000000", // Input text color
           },
         },
       },
       MuiInputLabel: {
         styleOverrides: {
           root: {
-            color: "#ffffff", // Input label color
+            color: "#000000", // Input label color
           },
         },
       },
