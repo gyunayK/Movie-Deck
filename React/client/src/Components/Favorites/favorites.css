@@ -51,8 +51,7 @@
   transform: scale(1.1);
 }
 
-
-.noFavorites{
+.noFavorites {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,9 +61,27 @@
   user-select: none;
 }
 
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80dvh;
+  user-select: none;
+}
+
+.loading_Fav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  background: transparent;
+  background-color: transparent;
+  border: none;
+  height: 40dvh;
+}
+
 @media screen and (max-width: 700px) {
   .noFavorites {
     font-size: 1.2rem;
   }
 }
-  

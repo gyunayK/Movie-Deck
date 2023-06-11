@@ -104,11 +104,11 @@ function Card({ movie }) {
     <>
       {movie.length === 0 ? (
         <Figure>
-          <img src={loadingImage} alt="loading animation" id="beforeLoad" />
+          <img src={loadingImage} alt="loading animation" className="beforeLoad" />
         </Figure>
       ) : movie && !movie.Error ? (
         <div className="cardWrapper">
-          {user ? (
+           {user ? (
             <button
               className="card_icon"
               onClick={isFavorite ? handleRemoveFavorite : handleFavorite}

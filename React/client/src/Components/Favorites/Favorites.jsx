@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Card from "./Card.favorites";
 import "./favorites.css";
+import loadingImage from "@/assets/IMG/Loading.gif";
 
 function Favorites() {
   const [favorites, setFavorites] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
   const token = localStorage.getItem("user");
@@ -33,6 +35,7 @@ function Favorites() {
   };
 
   const getFavorites = async () => {
+    setIsLoading(true);  // Set loading to true when fetching data
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -42,6 +45,7 @@ function Favorites() {
 
     const data = await response.json();
     setFavorites(data.favorites);
+    setIsLoading(false);  // Set loading to false after fetching data
   };
 
   useEffect(() => {
@@ -50,7 +54,13 @@ function Favorites() {
 
   return (
     <>
-      {favorites && favorites.length > 0 && (
+      {isLoading ? (
+        <div className="loadingWrapper">
+          <img src={loadingImage} alt="loading_Fav_animation" className="loading_Fav"/>
+        </div>
+      ) : favorites.length === 0 ? (
+        <h1>There are no favorites yet</h1>
+      ) : (
         <div className="gridContainer">
           {favorites.map((movie) => (
             <div key={movie.imdbID} className="cardWrapper">
@@ -59,12 +69,6 @@ function Favorites() {
           ))}
         </div>
       )}
-      {!favorites ||
-        (favorites.length === 0 && (
-          <div className="noFavorites">
-            <h1>Your list is empty!</h1>
-          </div>
-        ))}
     </>
   );
 }

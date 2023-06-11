@@ -28,15 +28,6 @@ export const Figure = styled.figure`
     color: #e4163a;
   }
 
-  #beforeLoad {
-    height: 100%;
-    width: 100%;
-    transition: 0.25s;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
@@ -57,6 +48,7 @@ export const Figure = styled.figure`
   img {
     height: 100%;
     width: 100%;
+    object-fit: contain;
     transition: 0.25s;
   }
 
