@@ -11,7 +11,7 @@ const userRouter = require('./src/routers/user.router')
 
 const app = express();
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
-console.log(path.join(__dirname, '..', 'client', 'dist'));
+
 
 app.use(morgan('dev'))
 app.use(cors())
