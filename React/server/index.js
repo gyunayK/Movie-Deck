@@ -10,7 +10,6 @@ const movieRouter = require('./src/routers/movie.router')
 const userRouter = require('./src/routers/user.router')
 
 const app = express();
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
 
 
 app.use(morgan('dev'))
