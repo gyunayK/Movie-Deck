@@ -15,14 +15,16 @@ export const Figure = styled.figure`
   overflow: hidden;
   margin: 0 auto;
 
-  #beforeLoad {
+  aspect-ratio: 2.6/3.8;
+
+  /* #beforeLoad {
     height: 100%;
     width: 100%;
     transition: 0.25s;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-  }
+  } */
 
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -37,7 +39,7 @@ export const Figure = styled.figure`
     }
 
     figcaption {
-      bottom: 0;
+      bottom: -26px;
     }
   }
 
@@ -61,7 +63,7 @@ export const Figure = styled.figure`
   img {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
 
     transition: 0.25s;
 
@@ -69,7 +71,7 @@ export const Figure = styled.figure`
 
   figcaption {
     position: absolute;
-    bottom: -45%;
+    bottom: -55%;
     left: 0;
     width: 100%;
     margin: 0;
