@@ -9,7 +9,7 @@
     margin-top: 40px;
     padding: 20px;
     border-radius: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
   }
   @media screen and (max-width: 1000px) {
     .aboutSection {

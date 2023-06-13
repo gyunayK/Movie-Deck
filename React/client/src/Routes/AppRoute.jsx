@@ -32,7 +32,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className="appWrapper">
         <Header />
 
         <Routes>

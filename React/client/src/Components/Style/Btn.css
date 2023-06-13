@@ -1,5 +1,5 @@
 .button-85 {
-  padding: 0.7em 4.5em;
+  padding: 0.7em 3.5em;
   border: none;
   outline: none;
   color: rgb(255, 255, 255);
@@ -12,6 +12,11 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   font-size: 1.2em;
+}
+@media screen and (max-width: 500px) {
+  .button-85{
+    padding: clamp(0.7em, 3.5vw, 1.5em) clamp(3em, 3.5vw, 4em);
+  }
 }
 
 .button-85:before {
@@ -34,7 +39,7 @@
   background-size: 400%;
   z-index: -1;
   filter: blur(10px);
-  -webkit-filter: blur(10px);
+  -webkit-filter: blur(50%);
   width: calc(100% + 4px);
   height: calc(100% + 4px);
   animation: glowing-button-85 20s linear infinite;

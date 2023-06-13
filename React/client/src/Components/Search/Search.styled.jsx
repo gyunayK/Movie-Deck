@@ -7,17 +7,16 @@ export const StyledForm = styled.form`
   justify-content: center;
   gap: 1rem;
   margin: 0 auto;
-  padding: 1rem;
-  background-color: #1c0a3e6a;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background-color: rgb(255 255 255 / 29%);
+  border-radius: 10rem;
   margin-top: 2rem;
-  height: 200px;
-  max-width: 400px;
+  height: 100%;
+  width: 400px;
 
-  @media screen and (max-width: 375px) {
-    padding-bottom: 30px;
-    margin: 10px;
+  @media screen and (max-width: 500px) {
+    max-width: clamp(250px, 90%, 400px);
+    padding: 20px 5px;
   }
 `;
 
@@ -38,6 +37,6 @@ export const StyledInput = styled.input`
   font-size: 1rem;
   color: black;
   @media screen and (max-width: 375px) {
-    width: 90%;
+    width: 65%;
   }
 `;

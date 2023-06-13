@@ -7,7 +7,7 @@ export const Figure = styled.figure`
   user-select: none;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: clamp(200px, 100%, 400px);
   height: 100%;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -17,14 +17,6 @@ export const Figure = styled.figure`
 
   aspect-ratio: 2.6/3.8;
 
-  /* #beforeLoad {
-    height: 100%;
-    width: 100%;
-    transition: 0.25s;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  } */
 
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);

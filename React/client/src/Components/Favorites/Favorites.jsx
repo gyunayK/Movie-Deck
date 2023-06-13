@@ -35,7 +35,7 @@ function Favorites() {
   };
 
   const getFavorites = async () => {
-    setIsLoading(true);  // Set loading to true when fetching data
+    setIsLoading(true); // Set loading to true when fetching data
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -45,7 +45,7 @@ function Favorites() {
 
     const data = await response.json();
     setFavorites(data.favorites);
-    setIsLoading(false);  // Set loading to false after fetching data
+    setIsLoading(false); 
   };
 
   useEffect(() => {
@@ -56,15 +56,22 @@ function Favorites() {
     <>
       {isLoading ? (
         <div className="loadingWrapper">
-          <img src={loadingImage} alt="loading_Fav_animation" className="loading_Fav"/>
+          <img
+            src={loadingImage}
+            alt="loading_Fav_animation"
+            className="loading_Fav"
+          />
         </div>
       ) : favorites.length === 0 ? (
-        <h1>There are no favorites yet</h1>
+        <h1 className="noFavorites">There are no favorites yet</h1>
       ) : (
         <div className="gridContainer">
           {favorites.map((movie) => (
             <div key={movie.imdbID} className="cardWrapper">
-              <Card movie={movie} handleRemoveFavorite={handleRemoveFavorite} />
+                <Card
+                  movie={movie}
+                  handleRemoveFavorite={handleRemoveFavorite}
+                />
             </div>
           ))}
         </div>

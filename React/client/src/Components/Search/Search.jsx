@@ -17,7 +17,7 @@ function Search({ setSearch }) {
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
-        <StyledLabel htmlFor="search">Discover a movie</StyledLabel>
+        <StyledLabel htmlFor="search">Search for a movie</StyledLabel>
         <StyledInput
           type="text"
           placeholder="Enter a movie title"

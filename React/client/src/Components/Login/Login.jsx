@@ -1,42 +1,29 @@
-import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+
 import LoadingButton from "@mui/lab/LoadingButton";
 import { CircularProgress } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { defaultTheme } from "./LoginTheme";
 
-import { toast } from "react-toastify";
+import { WhiteCheckbox, schema, handleLogin } from "./login.config";
 
 export default function SignIn() {
-  const navigate = useNavigate();
-  const host = import.meta.env.VITE_HOST;
-  const url = `${host}/user/login`;
-
-  const schema = z.object({
-    email: z.string().email({ message: "Invalid email" }),
-    password: z.string().min(12, {
-      message: "Password is too short! Must be a minimum of 12 characters.",
-    }),
-  });
-
   const {
     register,
     handleSubmit,
@@ -45,49 +32,16 @@ export default function SignIn() {
     resolver: zodResolver(schema),
   });
 
-  const handleLogin = async (formData) => {
-    const { email, password } = formData;
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.user) {
-        toast.success("Logged in successfully");
-        localStorage.setItem("user", data.user);
-        localStorage.setItem("userName", data.firstName);
-        window.location.href = "/";
-      } else {
-        toast.error("Invalid credentials");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong");
-    }
-  };
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container
         component="main"
-        maxWidth="xs"
+        maxWidth="sm"
         sx={{
-          marginTop: "10%",
-          backgroundColor: "#fbfbfb",
+          marginTop: 5,
           display: "flex",
-          height: "100%",
-          borderRadius: "10px",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <CssBaseline />
@@ -137,9 +91,10 @@ export default function SignIn() {
               <p className="error">{errors.password.message}</p>
             )}
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<WhiteCheckbox value="remember" />}
               label="Remember me"
             />
+
             <LoadingButton
               type="submit"
               fullWidth
@@ -153,13 +108,26 @@ export default function SignIn() {
             </LoadingButton>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link
+                  href="#"
+                  variant="body2"
+                  style={{ textDecoration: "none" }}
+                >
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item xs>
+              <Grid item>
                 <Button to="/signup" component={Link} variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  Don't have an account?&nbsp;&nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontWeight: "bolder",
+                      fontSize: "1.4em",
+                    }}
+                  >
+                    Sign Up
+                  </span>
                 </Button>
               </Grid>
             </Grid>

@@ -6,17 +6,21 @@ export const Figure = styled.figure`
   position: relative;
   display: flex;
   user-select: none;
-
   align-items: center;
   justify-content: center;
   max-width: content-fit;
-
-  height: 570px;
+  height: 100%;
+  width: 400px;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all ${BaseDuration} cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
   margin: 0 auto;
+
+  @media screen and (max-width: 500px) {
+    width: clamp(250px, 100%, 400px);
+    margin-bottom: 1rem;
+  }
 
   .card_icon {
     position: absolute;
@@ -41,7 +45,7 @@ export const Figure = styled.figure`
     }
 
     figcaption {
-      bottom: 0;
+      bottom: -30px;
     }
   }
 
@@ -49,13 +53,12 @@ export const Figure = styled.figure`
     height: 100%;
     width: 100%;
     object-fit: contain;
-
     transition: 0.25s;
   }
 
   figcaption {
     position: absolute;
-    bottom: -37%;
+    bottom: -50%;
     left: 0;
     width: 100%;
     margin: 0;
@@ -66,6 +69,10 @@ export const Figure = styled.figure`
     line-height: 1;
     transition: 0.25s;
 
+    @media screen and (max-width: 500px) {
+      bottom: -60%;
+    }
+
     h3 {
       margin: 0 0 20px;
       padding: 0;
@@ -75,11 +82,6 @@ export const Figure = styled.figure`
       font-size: 14px;
       line-height: 1.75;
     }
-  }
-
-  @media screen and (max-width: 450px) {
-    margin: 4px;
-    margin-bottom: 20px;
   }
 `;
 

@@ -8,7 +8,6 @@ import loadingImage from "@/assets/IMG/second.gif";
 
 import "./card.style.css";
 
-
 function Card({ movie }) {
   const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
   const [isFavorite, setIsFavorite] = useState(false);
@@ -103,12 +102,16 @@ function Card({ movie }) {
   return (
     <>
       {movie.length === 0 ? (
-        <Figure>
-          <img src={loadingImage} alt="loading animation" className="beforeLoad" />
-        </Figure>
+        <div className="indexLoadingWrapper">
+          <img
+            src={loadingImage}
+            alt="loading animation"
+            className="beforeLoad"
+          />
+        </div>
       ) : movie && !movie.Error ? (
         <div className="cardWrapper">
-           {user ? (
+          {user ? (
             <button
               className="card_icon"
               onClick={isFavorite ? handleRemoveFavorite : handleFavorite}
