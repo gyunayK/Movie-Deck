@@ -3,13 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    max-width: 60rem;
+    max-width: clamp(50rem, 40vw, 60rem);
     margin: 0 auto;
     padding: 1rem;
-    margin-top: 40px;
+    margin: 20px auto;
     padding: 20px;
     border-radius: 1rem;
-    box-shadow: 0 0 10px rgb(255, 255, 255);
+    box-shadow: 0 0 30px rgb(255, 255, 255);
   }
   @media screen and (max-width: 1000px) {
     .aboutSection {
