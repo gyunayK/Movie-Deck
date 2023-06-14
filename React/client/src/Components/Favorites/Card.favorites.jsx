@@ -1,7 +1,6 @@
 import { Figure, Notfound } from "./Card.styled";
 import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { MdOutlineFavorite } from "react-icons/md";
 
@@ -24,14 +23,12 @@ function Card({ movie, handleRemoveFavorite }) {
           </button>
 
           <Figure>
-            <LazyLoadImage
-              effect="blur"
-              loading="lazy"
+            <img
               alt={movie.Title}
               src={posterSrc}
               width="100%"
               height="100%"
-              delayMethod="debounce"
+             
             />
             <figcaption>
               <h3>Info</h3>

@@ -35,7 +35,7 @@ function Favorites() {
   };
 
   const getFavorites = async () => {
-    setIsLoading(true); // Set loading to true when fetching data
+    setIsLoading(true); 
     const response = await fetch(url, {
       method: "GET",
       headers: {
