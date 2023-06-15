@@ -53,7 +53,7 @@ function Favorites() {
 
   return (
     <>
-      {!isLoading ? (
+      {isLoading ? (
         <div className="loadingWrapper">
           <img
             src={"https://ik.imagekit.io/riviaa/Loading.gif?updatedAt=1686817878170"}
