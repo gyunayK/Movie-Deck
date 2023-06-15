@@ -15,21 +15,12 @@ function Card({ movie, handleRemoveFavorite }) {
         </Figure>
       ) : movie && movie.Title ? (
         <div className="cardFavWrapper">
-          <button
+          <MdOutlineFavorite
             className="card_icon"
             onClick={() => handleRemoveFavorite(movie)}
-          >
-            <MdOutlineFavorite />
-          </button>
-
+          />
           <Figure>
-            <img
-              alt={movie.Title}
-              src={posterSrc}
-              width="100%"
-              height="100%"
-             
-            />
+            <img alt={movie.Title} src={posterSrc} width="100%" height="100%" />
             <figcaption>
               <h3>Info</h3>
               <p>Year: {movie.Year}</p>

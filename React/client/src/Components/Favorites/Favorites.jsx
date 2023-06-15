@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Card from "./Card.favorites";
 import "./favorites.css";
-import loadingImage from "@/assets/IMG/Loading.gif";
 
 function Favorites() {
   const [favorites, setFavorites] = useState([]);
@@ -54,10 +53,10 @@ function Favorites() {
 
   return (
     <>
-      {isLoading ? (
+      {!isLoading ? (
         <div className="loadingWrapper">
           <img
-            src={loadingImage}
+            src={"https://ik.imagekit.io/riviaa/Loading.gif?updatedAt=1686817878170"}
             alt="loading_Fav_animation"
             className="loading_Fav"
           />
