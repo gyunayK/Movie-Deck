@@ -17,7 +17,6 @@ export const Figure = styled.figure`
 
   aspect-ratio: 2.6/3.8;
 
-
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
@@ -58,7 +57,6 @@ export const Figure = styled.figure`
     object-fit: cover;
 
     transition: 0.25s;
-
   }
 
   figcaption {

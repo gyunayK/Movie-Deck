@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const connectToDB = require('../service/mongodb');
 connectToDB();
 
+
 exports.getUser = async (req, res) => {
     try {
         // Find user by email
