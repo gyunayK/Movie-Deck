@@ -1,6 +1,6 @@
 <h1 align="center" id="title">MovieSearch</h1>
 
-<p align="center"><img src="[https://ik.imagekit.io/riviaa/image.png?updatedAt=1687146963954](https://ik.imagekit.io/riviaa/HomePage.png?updatedAt=1687148836686)" alt="project-image"></p>
+<p align="center"><img src="https://ik.imagekit.io/riviaa/HomePage.png?updatedAt=1687148836686" alt="project-image"></p>
 
 <p id="description">Welcome to my movie application! It's a place where movie lovers can discover new films delve into details about each one and save their favorites to return to later.</p>
 
