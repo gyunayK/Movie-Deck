@@ -80,7 +80,8 @@ export const Figure = styled.figure`
 
     p {
       font-size: 14px;
-      line-height: 1.75;
+      line-height: 2;
+      
     }
   }
 `;

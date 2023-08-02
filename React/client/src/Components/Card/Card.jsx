@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Figure } from "./Card.styled";
 import { toast } from "react-toastify";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import {FaRegCommentDots} from "react-icons/fa";
+import Modal from "../Modal/Modal";
 
 import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
@@ -10,9 +12,10 @@ import { genre_ID_Object } from "./genre_ID";
 import "./card.style.css";
 
 function Card({ movie }) {
-
   const [isFavorite, setIsFavorite] = useState(false);
   const [user, setUser] = useState({});
+
+  const [showModal, setShowModal] = useState(false);
 
   const genreLookup = genre_ID_Object.genres.reduce((acc, genre) => {
     acc[genre.id] = genre.name;
@@ -92,8 +95,6 @@ function Card({ movie }) {
     });
 
     const data = await response.json();
-    console.log(movie.id);
-
 
     if (data.message === "Movie is already in favorites") {
       setIsFavorite(true);
@@ -124,15 +125,25 @@ function Card({ movie }) {
       ) : movie && !movie.Error ? (
         <div className="cardWrapper">
           {user ? (
-            <button
-              className="card_icon"
-              onClick={isFavorite ? handleRemoveFavorite : handleFavorite}
-            >
-              {isFavorite ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
-            </button>
+            <>
+              <button
+                className="card_icon"
+                onClick={isFavorite ? handleRemoveFavorite : handleFavorite}
+              >
+                {isFavorite ? (
+                  <MdOutlineFavorite />
+                ) : (
+                  <MdOutlineFavoriteBorder />
+                )}
+              </button>
+
+            
+
+            </>
           ) : null}
           <Figure>
             <img
+              onClick={() => setShowModal(true)}
               className="cardL"
               src={
                 movie.poster_path
@@ -142,11 +153,27 @@ function Card({ movie }) {
               alt={movie.Title}
             />
             <figcaption>
-              <h3>Info</h3>
-              <p>Year: {movie.release_date}</p>
-              <p>IMBd rating: {movie.vote_average}</p>
-              <p>Genre: {genreNames || "Not available"}</p>
+              <h3 className="font-bold">Info</h3>
+              <p>
+                <span className="font-extrabold">Year:</span>{" "}
+                {movie.release_date}
+              </p>
+              <p>
+                <span className="font-extrabold">IMBd rating:</span>{" "}
+                {movie.vote_average}
+              </p>
+              <p>
+                <span className="font-extrabold">Genre:</span>{" "}
+                {genreNames || "Not available"}
+              </p>
             </figcaption>
+            {showModal && (
+              <Modal
+                movie={movie}
+                showModal={showModal}
+                setShowModal={setShowModal}
+              />
+            )}
           </Figure>
         </div>
       ) : null}

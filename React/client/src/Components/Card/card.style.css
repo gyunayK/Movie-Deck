@@ -17,9 +17,20 @@
   top: 10px;
   right: 10px;
   font-size: 45px;
-  z-index: 100;
   cursor: pointer;
   color: #e4163a;
+  z-index: 40;
+}
+.card_icon_2 {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  font-size: 45px;
+  cursor: pointer;
+  color: #ffff;
+  z-index: 40;
 }
 .indexLoadingWrapper{
   height: 50vh;
@@ -35,5 +46,9 @@
 }
 
 .card_icon:hover {
+  transform: scale(1.1);
+}
+
+.card_icon_2:hover {
   transform: scale(1.1);
 }

@@ -8,6 +8,7 @@ const path = require('path')
 
 const movieRouter = require('./src/routers/movie.router')
 const userRouter = require('./src/routers/user.router')
+const commentRouter = require('./src/routers/comment.router')
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.get('/', (req, res) => {
 app.use('/movie', movieRouter)
 
 app.use('/user', userRouter)
+
+app.use('/comment', commentRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
