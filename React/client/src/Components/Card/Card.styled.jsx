@@ -8,7 +8,7 @@ export const Figure = styled.figure`
   user-select: none;
   align-items: center;
   justify-content: center;
-  width: clamp(200px, 100%, 400px);
+  width: 270px;
   height: 100%;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -53,7 +53,7 @@ export const Figure = styled.figure`
     height: 100%;
     width: 100%;
     object-fit: cover;
-    transition: 0.25s;
+    transition: 0.25s; 
   }
 
   figcaption {

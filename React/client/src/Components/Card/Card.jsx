@@ -5,13 +5,23 @@ import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 import defaultImage from "@/assets/IMG/No_IMG.png";
 import loadingImage from "@/assets/IMG/second.gif";
+import { genre_ID_Object } from "./genre_ID";
 
 import "./card.style.css";
 
 function Card({ movie }) {
-  const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
+
   const [isFavorite, setIsFavorite] = useState(false);
   const [user, setUser] = useState({});
+
+  const genreLookup = genre_ID_Object.genres.reduce((acc, genre) => {
+    acc[genre.id] = genre.name;
+    return acc;
+  }, {});
+
+  const genreNames = (movie.genre_ids || [])
+    .map((id) => genreLookup[id])
+    .join(", ");
 
   const token = localStorage.getItem("user");
   const host = import.meta.env.VITE_HOST;
@@ -74,7 +84,7 @@ function Card({ movie }) {
       return;
     }
 
-    const response = await fetch(`${url}/${movie.imdbID}`, {
+    const response = await fetch(`${url}/${movie.id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -82,6 +92,8 @@ function Card({ movie }) {
     });
 
     const data = await response.json();
+    console.log(movie.id);
+
 
     if (data.message === "Movie is already in favorites") {
       setIsFavorite(true);
@@ -120,12 +132,20 @@ function Card({ movie }) {
             </button>
           ) : null}
           <Figure>
-            <img className="cardL" src={posterSrc} alt={movie.Title} />
+            <img
+              className="cardL"
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+                  : defaultImage
+              }
+              alt={movie.Title}
+            />
             <figcaption>
               <h3>Info</h3>
-              <p>Year: {movie.Year}</p>
-              <p>IMBd rating: {movie.imdbRating}</p>
-              <p>Genre: {movie.Genre}</p>
+              <p>Year: {movie.release_date}</p>
+              <p>IMBd rating: {movie.vote_average}</p>
+              <p>Genre: {genreNames || "Not available"}</p>
             </figcaption>
           </Figure>
         </div>

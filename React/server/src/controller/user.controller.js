@@ -73,6 +73,8 @@ exports.postFavorite = async (req, res) => {
     const token = req.body.token;
     const movie = req.body.movie;
 
+    console.log(movie);
+
     try {
         // Verify the token and get the user
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
@@ -83,7 +85,7 @@ exports.postFavorite = async (req, res) => {
         }
 
         // Check if the movie is already in favorites
-        if (user.favorites && user.favorites.some(favMovie => favMovie.imdbID === movie.imdbID)) {
+        if (user.favorites && user.favorites.some(favMovie => favMovie.id === movie.id)) {
             return res.status(400).json({ message: 'Movie is already in favorites' });
         }
 
@@ -114,13 +116,13 @@ exports.deleteFavorite = async (req, res) => {
         }
 
         // Check if the movie is already in favorites
-        const movieInFavorites = user.favorites.find(fav => fav.imdbID === movie.imdbID);
+        const movieInFavorites = user.favorites.find(fav => fav.id === movie.id);
         if (!movieInFavorites) {
             return res.status(400).json({ message: 'Movie is not in favorites' });
         }
 
         // Remove movie from user's favorites
-        user.favorites = user.favorites.filter(fav => fav.imdbID !== movie.imdbID);
+        user.favorites = user.favorites.filter(fav => fav.id !== movie.id);
         await user.save();
 
         return res.status(200).json({ message: 'Movie removed from favorites' });
@@ -146,7 +148,9 @@ exports.getFavorite = async (req, res) => {
         }
 
         // Check if the movie is already in favorites
-        if (user.favorites && user.favorites.some(favMovie => favMovie.imdbID === movieId)) {
+        const favMovie = user.favorites && user.favorites.find(favMovie => String(favMovie.id) === movieId);
+        if (favMovie) {
+            
             return res.status(200).json({ message: 'Movie is already in favorites' });
         }
 
@@ -158,7 +162,6 @@ exports.getFavorite = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
-
 
 exports.getFavoriteList = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];

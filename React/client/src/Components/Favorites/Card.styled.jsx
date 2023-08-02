@@ -7,7 +7,7 @@ export const Figure = styled.figure`
   user-select: none;
   align-items: center;
   justify-content: center;
-  width: clamp(200px, 100%, 400px);
+  width: 400px;
   height: 100%;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

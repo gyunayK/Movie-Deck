@@ -4,28 +4,51 @@ import loadingImage from "@/assets/IMG/second.gif";
 
 import { MdOutlineFavorite } from "react-icons/md";
 
-function Card({ movie, handleRemoveFavorite }) {
-  const posterSrc = movie.Poster !== "N/A" ? movie.Poster : defaultImage;
+import { genre_ID_Object } from "@/Components/Card/genre_ID";
 
+function Card({ movie, handleRemoveFavorite }) {
+
+
+
+
+  const genreLookup = genre_ID_Object.genres.reduce((acc, genre) => {
+    acc[genre.id] = genre.name;
+    return acc;
+  }, {});
+
+  const genreNames = (movie.genre_ids || [])
+    .map((id) => genreLookup[id])
+    .join(", ");
+
+
+  console.log(movie);
   return (
     <>
       {movie.length === 0 ? (
         <Figure>
           <img src={loadingImage} alt="loading animation" id="beforeLoad" />
         </Figure>
-      ) : movie && movie.Title ? (
+      ) : movie && movie.title ? (
         <div className="cardFavWrapper">
           <MdOutlineFavorite
             className="card_icon"
             onClick={() => handleRemoveFavorite(movie)}
           />
-          <Figure>
-            <img alt={movie.Title} src={posterSrc} width="100%" height="100%" />
+                    <Figure>
+            <img
+              className="cardL"
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+                  : defaultImage
+              }
+              alt={movie.Title}
+            />
             <figcaption>
               <h3>Info</h3>
-              <p>Year: {movie.Year}</p>
-              <p>IMBd rating: {movie.imdbRating}</p>
-              <p>Genre: {movie.Genre}</p>
+              <p>Year: {movie.release_date}</p>
+              <p>IMBd rating: {movie.vote_average}</p>
+              <p>Genre: {genreNames || "Not available"}</p>
             </figcaption>
           </Figure>
         </div>
