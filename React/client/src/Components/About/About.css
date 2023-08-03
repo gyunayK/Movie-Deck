@@ -5,6 +5,7 @@
     align-items: start;
     max-width: clamp(50rem, 40vw, 60rem);
     margin: 0 auto;
+    gap: 1.4rem;
     padding: 1rem;
     margin: 20px auto;
     padding: 20px;

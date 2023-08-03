@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 exports.getCommentByMovieId = async (req, res) => {
   const movieId = req.params.movieId;
   try {
-    const comments = await Comment.find({ movieId }).populate("userId", "name"); // Add .populate() method
+    const comments = await Comment.find({ movieId }).populate('userId', ['firstName', 'lastName']);
     return res.status(200).json({ comments });
   } catch (err) {
     console.error(err);

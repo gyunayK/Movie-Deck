@@ -66,7 +66,7 @@ function Favorites() {
       ) : (
         <div className="gridContainer">
           {favorites.map((movie) => (
-            <div key={movie.imdbID} className="cardWrapper">
+            <div key={movie.id} className="cardWrapper">
                 <Card
                   movie={movie}
                   handleRemoveFavorite={handleRemoveFavorite}

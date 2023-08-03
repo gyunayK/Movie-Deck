@@ -1,4 +1,3 @@
-import "./appStyled.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Card from "../Components/Card/Card";
@@ -12,7 +11,6 @@ import Favorites from "../Components/Favorites/Favorites";
 function App() {
   const [movie, setMovie] = useState([]);
   const [search, setSearch] = useState("");
-  console.log(movie);
 
   const host = import.meta.env.VITE_HOST;
   const url = `${host}/movie/search/${search}`;
@@ -36,21 +34,18 @@ function App() {
     <BrowserRouter>
       <div className="appWrapper">
         <Header />
-
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Search setSearch={setSearch} className="first" />
+                <Search setSearch={setSearch} />
 
-                <div className="container">
-                  <div className="grid">
-                    {search &&
-                      movie?.map((movie) => (
-                        <Card key={movie.id} movie={movie} />
-                      ))}
-                  </div>
+                <div className="grid xs:max-w-xs sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  sm:max-w-screen-2xl mx-auto">
+                  {search &&
+                    movie?.map((movie) => (
+                      <Card key={movie.id} movie={movie} />
+                    ))}
                 </div>
               </>
             }

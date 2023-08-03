@@ -1,4 +1,5 @@
 const axios = require('axios');
+const API_KEY = process.env.MVDB_API_KEY;
 
 exports.getMovieByName = async (req, res) => {
     const name = req.params.name;
@@ -6,7 +7,7 @@ exports.getMovieByName = async (req, res) => {
         return;
     }
     const apikey = process.env.MOVIE_API_KEY;
-    const url = `https://api.themoviedb.org/3/search/movie?query=${name}&api_key=faa26c98f672c9b9ceea429f26f087b1`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${name}&api_key=${API_KEY}`;
 
     try {
         const response = await axios.get(url);

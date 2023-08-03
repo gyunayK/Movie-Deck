@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Figure } from "./Card.styled";
 import { toast } from "react-toastify";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
-import {FaRegCommentDots} from "react-icons/fa";
 import Modal from "../Modal/Modal";
 
 import defaultImage from "@/assets/IMG/No_IMG.png";
@@ -144,7 +143,7 @@ function Card({ movie }) {
           <Figure>
             <img
               onClick={() => setShowModal(true)}
-              className="cardL"
+              className="cardL cursor-pointer"
               src={
                 movie.poster_path
                   ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
