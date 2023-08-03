@@ -6,8 +6,6 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "./modalStyled.css";
 
-import { FaRegCommentDots } from "react-icons/fa";
-
 function Modal({ movie, showModal, setShowModal }) {
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
@@ -143,26 +141,28 @@ function Modal({ movie, showModal, setShowModal }) {
               </div>
             )}
 
-            <form
-              className="w-full flex justify-end mt-4 gap-2"
-              onSubmit={handleSubmit}
-            >
-              <textarea
-                type="text"
-                className="resize-none py-3 px-4 block w-full border-gray-200 rounded-md text-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-300 dark:border-gray-700 dark:text-black placeholder:text-black"
-                placeholder="Add a comment"
-                value={newComment}
-                onChange={(event) => setNewComment(event.target.value)}
-                required
-                draggable="false"
-              />
-              <button
-                className="px-4 py-2 text-lg text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                type="submit"
+            {token && (
+              <form
+                className="w-full flex justify-end mt-4 gap-2"
+                onSubmit={handleSubmit}
               >
-                Submit
-              </button>
-            </form>
+                <textarea
+                  type="text"
+                  className="resize-none py-3 px-4 block w-full border-gray-200 rounded-md text-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-300 dark:border-gray-700 dark:text-black placeholder:text-black"
+                  placeholder="Add a comment"
+                  value={newComment}
+                  onChange={(event) => setNewComment(event.target.value)}
+                  required
+                  draggable="false"
+                />
+                <button
+                  className="px-4 py-2 text-lg text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
           </Dialog.Panel>
         </div>
       </Dialog>
