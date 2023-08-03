@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -11,7 +15,6 @@
 .first {
   grid-area: first;
   transition: transform 0.3s ease-out;
-  
 }
 
 .second {
@@ -27,5 +30,3 @@
 .show-second .second {
   opacity: 1;
 }
-
-
