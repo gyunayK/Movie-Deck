@@ -103,7 +103,7 @@ function Card({ movie }) {
   };
 
   useEffect(() => {
-    if (token === null) {
+    if (!token) {
       setUser(false);
     } else {
       setUser(true);

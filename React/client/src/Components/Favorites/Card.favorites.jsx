@@ -41,7 +41,7 @@ function Card({ movie, handleRemoveFavorite }) {
                   ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
                   : defaultImage
               }
-              alt={movie.Title}
+              alt={movie.title}
             />
             <figcaption>
               <h3>Info</h3>

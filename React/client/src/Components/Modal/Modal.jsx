@@ -39,6 +39,7 @@ function Modal({ movie, showModal, setShowModal }) {
       toast.error("Error adding comment");
     }
   }
+  console.log(comments);
 
   async function getComments() {
     const response = await fetch(`${host}/comment/${movie.id}`);
@@ -113,9 +114,9 @@ function Modal({ movie, showModal, setShowModal }) {
               </button>
             </div>
 
-            {comments.length > 0 && (
+            {comments?.length > 0 && (
               <div className=" p-5 border border-gray-400 rounded-md max-h-72 overflow-auto mt-2">
-                {comments.map((comment) => {
+                {comments?.map((comment) => {
                   // Convert the timestamp to a Date object
                   const date = new Date(comment.timestamp);
                   // Format the date and time
@@ -128,6 +129,7 @@ function Modal({ movie, showModal, setShowModal }) {
                       <div className="scrol flex flex-col justify-between text-black bg-white border-2 border-gray-400 mb-5 p-3 rounded-md ">
                         <div className="flex gap-2 text-xs font-medium justify-between">
                           <div className="flex gap-2">
+
                             <p>{comment.userId.firstName}</p>
                             <p>{comment.userId.lastName}</p>
                           </div>
