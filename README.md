@@ -18,9 +18,11 @@
 
 Here're some of the project's best features:
 
-*   Movie Search: Just type in the name of a movie you're curious about and the app will pull up all the details you need.
-*   Favorites List: Found a movie you love? Add it to your favorites list so you can easily find it again later.
-*   Responsive Design: Whether you're on your computer tablet or phone the app will adjust to fit your screen perfectly.
+*  Movie Search: Just type in the name of a movie you're curious about and the app will pull up all the details you need.
+*  Favorites List: Found a movie you love? Add it to your favorites list so you can easily find it again later.
+*  Commenting System: Have thoughts about a movie? Leave a comment on it and see what others have said. Engage with a community of movie lovers.
+*  Responsive Design: Whether you're on your computer, tablet, or phone, the app will adjust to fit your screen perfectly. No more frustrating 
+   scrolling or zooming.
 
 <h2>🛠️ Installation Steps:</h2>
 
