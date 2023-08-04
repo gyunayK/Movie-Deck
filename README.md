@@ -51,6 +51,7 @@ Technologies used in the project:
 *   Node.js
 *   JSON Web Token
 *   bcrypt
+*   TailwindCSS
 *   Styled-components
 
 <h2>🛡️ License:</h2>
