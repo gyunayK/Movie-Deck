@@ -11,6 +11,7 @@
 <h2>Project Screenshots:</h2>
 
 <img src="https://ik.imagekit.io/riviaa/image.png?updatedAt=1687147260649" alt="project-screenshot" width="750" height="100%/">
+<img src="https://ik.imagekit.io/riviaa/Screenshot%202023-08-04%20at%202.16.04%20PM.png?updatedAt=1691183858959" alt="project-screenshot" width="750" height="100%/">
 
   
   
