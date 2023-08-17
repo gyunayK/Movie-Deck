@@ -81,11 +81,6 @@ function Card({ movie }) {
   };
 
   const checkFavorite = async () => {
-    if (movie.Error === "Movie not found!") {
-      toast.error("Movie not found");
-      return;
-    }
-
     const response = await fetch(`${url}/${movie.id}`, {
       method: "GET",
       headers: {
@@ -113,15 +108,7 @@ function Card({ movie }) {
 
   return (
     <>
-      {movie.length === 0 ? (
-        <div className="indexLoadingWrapper">
-          <img
-            src={loadingImage}
-            alt="loading animation"
-            className="beforeLoad"
-          />
-        </div>
-      ) : movie && !movie.Error ? (
+      {movie && !movie.Error ? (
         <div className="cardWrapper">
           {user ? (
             <>
@@ -135,12 +122,9 @@ function Card({ movie }) {
                   <MdOutlineFavoriteBorder />
                 )}
               </button>
-
-            
-
             </>
           ) : null}
-          <Figure>
+          <Figure style={movie.poster_path ? {} : { background: "black" }}>
             <img
               onClick={() => setShowModal(true)}
               className="cardL cursor-pointer"
@@ -150,7 +134,9 @@ function Card({ movie }) {
                   : defaultImage
               }
               alt={movie.Title}
+              style={movie.poster_path ? {} : { objectFit: "contain" }}
             />
+
             <figcaption>
               <h3 className="font-bold">Info</h3>
               <p>
