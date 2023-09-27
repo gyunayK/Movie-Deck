@@ -6,7 +6,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://movie-search-client-lac.vercel.app/](https://movie-search-client-lac.vercel.app/)
+[[https://movie-search-client-lac.vercel.app/](https://movie-deck-client.vercel.app/)]
 
 <h2>Project Screenshots:</h2>
 
