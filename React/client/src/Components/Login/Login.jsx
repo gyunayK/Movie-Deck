@@ -32,6 +32,14 @@ export default function SignIn() {
     resolver: zodResolver(schema),
   });
 
+  const handleDemoUser = () => {
+    const demoUser = {
+      email: "hoge@hoge.com",
+      password: "123123123123",
+    };
+    handleLogin(demoUser);
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container
@@ -106,6 +114,17 @@ export default function SignIn() {
             >
               Log in
             </LoadingButton>
+            <LoadingButton
+              fullWidth
+              variant="contained"
+              onClick={handleDemoUser}
+              loading={isSubmitting}
+              size="large"
+              loadingIndicator={<CircularProgress size={35} color="primary" />}
+            >
+              Demo user
+            </LoadingButton>
+
             <Grid container>
               <Grid item xs>
                 <Link
