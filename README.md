@@ -56,4 +56,4 @@ npm i & npm run dev
 
 <br>
 
-<h2>🛡️ License</h2> <p>This project is licensed under the @Gyunay</p>
+<h2>🛡️ License</h2> <p>This project is licensed under @Gyunay</p>
