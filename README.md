@@ -1,8 +1,8 @@
-<h1 align="center" id="title">MovieSearch</h1>
+<h1 align="center" id="title">Movie-Deck</h1>
 
 <p align="center"><img src="https://ik.imagekit.io/riviaa/Screenshot%202023-10-27%20at%203.33.44%20PM.png?updatedAt=1698446116574" alt="project-image"></p>
 
-<p id="description">MovieSearch is a platform for movie enthusiasts to discover new films, explore detailed information, and save their favorite movies for later viewing.</p>
+<p id="description">Movie-Deck is a platform for movie enthusiasts to discover new films, explore detailed information, and save their favourite movies for later viewing.</p>
 
 <h2>🚀 Demo</h2>
 
