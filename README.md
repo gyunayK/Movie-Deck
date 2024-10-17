@@ -6,8 +6,8 @@
 
 <h2>🚀 Demo</h2>
 
-<p align="center">
-  <a href="https://movie-deck-client.vercel.app/">Live Demo</a>
+<p>
+  <a href="https://movie-deck-client.vercel.app/">https://movie-deck-client.vercel.app</a>
 </p>
 
 <h2>📸 Project Screenshots</h2>
