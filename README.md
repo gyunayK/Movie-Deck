@@ -39,13 +39,14 @@ npm i & npm run dev
   
   
 <h2>💻 Built with</h2>
-* MongoDB
-* Express
-* React.js
-* Node.js
-* JSON Web Token
-* bcrypt
-* TailwindCSS
-* Styled-components
+
+*   MongoDB
+*   Express
+*   React.js
+*   Node.js
+*   JSON Web Token
+*   bcrypt
+*   TailwindCSS
+*   Styled-components
 
 <h2>🛡️ License</h2> <p>This project is licensed under the @Gyunay</p>
